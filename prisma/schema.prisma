@@ -1,0 +1,36 @@
+// prisma/schema.prisma
+// Define your database models
+
+generator client {
+  provider = "prisma-client"
+  output   = "./generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+// model
+
+enum ProductCategory {
+  MOBILE
+  LAPTOP
+  WATCH
+  OTHER
+}
+
+model Product{
+  id String  @id @default(uuid())
+  name String
+  catagory ProductCategory
+  description String?
+  price Float? @default(0.0)
+  quantity Int? @default(0)
+  image Image[]
+}
+
+model Image{
+  id String @id @default(uuid())
+  image String
+  product Product? @relation(fields: [productId],references: [id])
+  productId String?
+}
