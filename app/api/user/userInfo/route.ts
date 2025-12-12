@@ -21,7 +21,7 @@ export async function GET() {
         email: string;
       };
     } catch (err) {
-      console.log(err)
+      console.log(err);
       return NextResponse.json(
         { message: 'توکن نامعتبر یا منقضی شده است' },
         { status: 401 },

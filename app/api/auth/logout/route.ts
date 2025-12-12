@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 
-
 export async function POST() {
   try {
     const response = NextResponse.json({ message: 'خروج موفقیت‌آمیز بود' });
