@@ -1,9 +1,6 @@
-import { PrismaClient } from '@/prisma/generated/client';
-import type * as PrismaType from '@/prisma/generated/client';
+import { PrismaClient } from '@/src/generated/client';
 
 export const prisma = new PrismaClient({
-  accelerateUrl: 'http://localhost:4466',
+  accelerateUrl: process.env.ACCELERATE_URL!,
   log: ['query', 'info', 'warn', 'error'],
 });
-
-export type {PrismaType}
