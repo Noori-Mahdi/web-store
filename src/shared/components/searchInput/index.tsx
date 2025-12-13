@@ -12,7 +12,11 @@ const SearchInput = () => {
 
   return (
     <InputGroup className="w-90 p-2">
-      <InputGroupInput value={search} onChange={handleSearch} placeholder="جستجو ..." />
+      <InputGroupInput
+        value={search}
+        onChange={handleSearch}
+        placeholder="جستجو ..."
+      />
       <InputGroupAddon>
         <Search className="" />
       </InputGroupAddon>

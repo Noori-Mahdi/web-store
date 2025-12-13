@@ -7,12 +7,13 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (<>
-  <Breadcrumb/>
-    <div className='flex'>
-      <SideDrawer className="" list={dashboardMenuItems} />
-      {children}
-    </div>
-  </>
+  return (
+    <>
+      <Breadcrumb />
+      <div className="flex">
+        <SideDrawer className="" list={dashboardMenuItems} />
+        {children}
+      </div>
+    </>
   );
 }

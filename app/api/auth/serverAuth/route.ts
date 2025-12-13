@@ -5,7 +5,7 @@ import { prisma } from '@/src/lib/prisma';
 export async function GET(request: Request) {
   try {
     const token = request.headers.get('Authorization')?.replace('Bearer ', '');
-    
+
     if (!token) {
       return NextResponse.json(
         { message: 'مشکل احراز هویت: توکن موجود نیست' },

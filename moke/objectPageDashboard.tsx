@@ -1,6 +1,10 @@
 import { CreditCard, ImagePlus, ShoppingCart, Tags, Users } from 'lucide-react';
 
-export const dashboardMenuItems: { label: string; name: string; icon: React.ReactNode }[] = [
+export const dashboardMenuItems: {
+  label: string;
+  name: string;
+  icon: React.ReactNode;
+}[] = [
   {
     label: 'کالاها',
     name: 'products',
