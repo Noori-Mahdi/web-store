@@ -61,7 +61,7 @@ const MainContext = (props: TMainContextProps) => {
   }, [state.user]);
 
   useEffect(() => {
-    updateUserInfo();
+      updateUserInfo();
   }, []);
   return (
     <Context.Provider

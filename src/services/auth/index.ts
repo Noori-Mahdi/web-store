@@ -17,9 +17,15 @@ export type TLoginResponse = {
   message: string;
   token: string;
 };
-
+const serverAuth = (token: string) => {
+  return api.get(endPoints.serverAuth, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 const login = (data: TLoginData) => api.post(endPoints.login, data);
 const register = (data: TRegisterData) => api.post(endPoints.register, data);
-const logout = () => api.get('/auth/logout');
+const logout = () => api.post('/auth/logout');
 
-export { login, register, logout };
+export { login, register, logout, serverAuth };

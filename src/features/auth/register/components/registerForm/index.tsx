@@ -1,6 +1,6 @@
 'use client';
 import { TValidationType, validateInput } from '@/src/lib/validation';
-import { authService } from '@/src/services/auth';
+import { register } from '@/src/services/auth';
 import Input from '@/src/shared/components/input';
 import {
   Card,
@@ -52,7 +52,7 @@ const RegisterForm = () => {
 
     setLoading(true);
     try {
-      await authService.register(data);
+      await register(data);
       route.push('/login');
     } catch (error) {
       console.log(error);

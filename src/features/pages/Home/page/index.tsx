@@ -1,9 +1,7 @@
-import Header from '@/src/shared/components/header';
-
 const HomePage = () => {
   return (
-    <div>
-      <Header />
+    <div className="flex flex-col">
+      <main className="flex-1">home</main>
     </div>
   );
 };

@@ -14,20 +14,22 @@ type TLogoProps = {
 
 const Logo = ({
   lable,
-  width = 60,
-  height = 60,
+  width = 50,
+  height = 50,
   isLink,
   logoClassName,
   labelClassName,
   mainClassName,
 }: TLogoProps) => {
   return (
-    <Link href={isLink ?? '#'} className={twMerge('flex', mainClassName)}>
-      {lable && (
-        <span className={twMerge('text-lg font-bold', labelClassName)}>
-          {lable}
-        </span>
+    <Link
+      href={isLink ?? '#'}
+      className={twMerge(
+        'flex gap-3 items-center font-extrabold text-xl',
+        mainClassName,
       )}
+    >
+      {lable && <span className={twMerge(labelClassName)}>{lable}</span>}
       <Image
         src={'/image/logo.png'}
         alt="logo"
