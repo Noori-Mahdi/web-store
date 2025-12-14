@@ -6,6 +6,7 @@ import MainContext from '@/src/shared/context/AuthContext';
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { routing } from '../../src/i18n/routing';
 import { LanguageProvider } from '@/src/shared/context/LanguageContext';
+import { ThemeProvider } from '@/src/provider/theme-provider';
 
 type Props = {
   children: React.ReactNode;
@@ -32,14 +33,21 @@ export default async function RootLayout({ children, params }: Props) {
   if (!hasLocale(routing.locales, locale)) {
   }
   return (
-    <html lang="en" dir="rtl">
+    <html lang="fa" dir="rtl" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <MainContext>
           <NextIntlClientProvider>
             <LanguageProvider>
-              <UIWrapper>{children}</UIWrapper>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+                disableTransitionOnChange
+              >
+                <UIWrapper>{children}</UIWrapper>{' '}
+              </ThemeProvider>
             </LanguageProvider>
           </NextIntlClientProvider>
         </MainContext>

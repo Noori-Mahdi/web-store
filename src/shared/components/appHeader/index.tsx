@@ -4,6 +4,7 @@ import Container from '../container';
 import { usePathname, useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import LanguageSwitcher from '../LanguageSwitcher';
+import { ModeToggle } from '../themeButton';
 
 const AppHeader = () => {
   const router = useRouter();
@@ -24,6 +25,7 @@ const AppHeader = () => {
             {t(basePath.length > 0 ? basePath : 'home')}
           </h1>
           <LanguageSwitcher />
+          <ModeToggle />
         </div>
       </Container>
     </header>
