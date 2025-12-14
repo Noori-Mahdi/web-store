@@ -8,3 +8,4 @@ export * from './breadcrumb';
 export * from './textarea';
 export * from './input-group';
 export * from './dropdown-menu';
+export * from './switch';

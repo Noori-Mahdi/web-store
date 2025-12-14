@@ -8,80 +8,81 @@ import { twMerge } from 'tailwind-merge';
 
 type TSideDrawerProps = {
   list: { label: string; name: string; icon: React.ReactNode }[];
-  className: string;
+  className?: string;
 };
 
 const SideDrawer = ({ list, className }: TSideDrawerProps) => {
-  const [openSideBar, setOpenSideBar] = useState(false);
-
-  const p = usePathname();
+  const [openSideBar, setOpenSideBar] = useState(true);
+  const pathname = usePathname();
 
   return (
-    <>
-      <ul
-        className={twMerge(
-          'bg-bg-primary border-primary-700 z-20 flex flex-1 items-start justify-around gap-2 rounded-md border px-2 py-3 text-gray-50 shadow-md md:hidden',
-          className,
-        )}
-      >
+    <div className={twMerge('flex', className)}>
+      {/* Mobile Drawer */}
+      <ul className="md:hidden bg-bg-primary border-primary-700 z-20 flex flex-1 rounded-md border text-gray-50 shadow-md">
         {list.map((e) => (
-          <li key={e.name}>
+          <li key={e.name} className="w-full">
             <Link
-              onClick={() => {
-                setOpenSideBar(false);
-              }}
-              href={e.name}
+              href={`/${e.name}`}
+              onClick={() => setOpenSideBar(false)}
               className={twMerge(
-                'hover:text-accent-400 relative flex cursor-pointer gap-2 p-1 text-xs transition-colors duration-200 last:border-none',
-                p === '/' + e.name && 'text-accent-400 border-0',
+                'flex items-center gap-2 px-4 py-2 text-sm transition-colors duration-200 rounded hover:bg-bg-secondary hover:text-accent-400',
+                pathname === '/' + e.name && 'bg-bg-secondary text-accent-400',
               )}
             >
               {e.icon}
-              <span> {e.label}</span>
+              <span>{e.label}</span>
             </Link>
           </li>
         ))}
       </ul>
 
-      <ul
+      {/* Desktop Drawer */}
+      <div
         className={twMerge(
-          'bg-bg-primary border-primary-900 hidden flex-col items-end justify-start border-l-2 text-gray-50 md:flex',
-          className,
+          'hidden md:flex flex-col bg-bg-primary border-primary-900 border-l-2 text-gray-50 transition-all duration-300 shadow-lg',
+          openSideBar ? 'w-44' : 'w-20',
         )}
       >
         {list.map((e) => (
-          <li className="" key={e.name}>
-            <Link
-              href={e.name}
-              className={twMerge(
-                'hover:text-accent-400 relative mx-2 my-0.5 flex cursor-pointer justify-between gap-2 rounded-md px-2 py-3 text-white transition-colors duration-200 last:border-none',
-                openSideBar ? 'min-w-[200px] text-sm' : 'w-fit text-xl',
-                p === '/' + e.name &&
-                  'bg-bg-secondary text-accent-400 border-0',
-              )}
-            >
-              {openSideBar && <span className="font-normal"> {e.label}</span>}
-              <span className={twMerge(openSideBar ? 'text-base' : 'text-lg')}>
-                {e.icon}
-              </span>
-            </Link>
-          </li>
+          <Link
+            key={e.name}
+            href={`/dashboard/${e.name}`}
+            className={twMerge(
+              'flex items-center font-semibold hover:text-white text-gray-400 gap-3 px-4 py-3 my-1 rounded transition-colors duration-200 ',
+              openSideBar ? 'justify-between' : 'justify-center',
+              pathname.includes('/dashboard/' + e.name) &&
+                'text-blue-500 hover:text-blue-500',
+            )}
+          >
+            {openSideBar && <span className="text-sm">{e.label}</span>}
+            <span className={twMerge(openSideBar ? 'text-lg' : 'text-xl')}>
+              {e.icon}
+            </span>
+          </Link>
         ))}
-        <li className="px-2 py-3 text-sm">
+
+        {/* Toggle Button */}
+        <button
+          className={twMerge(
+            'mt-auto mb-4 p-1 px-4 py-3  flex rounded hover:bg-bg-secondary transition',
+            openSideBar ? 'justify-end' : 'justify-center',
+          )}
+          onClick={() => setOpenSideBar(!openSideBar)}
+        >
           {openSideBar ? (
-            <ArrowRight
-              className="hover:text-primary-400 mx-2 cursor-pointer"
-              onClick={() => setOpenSideBar(!openSideBar)}
+            <ArrowLeft
+              size={16}
+              className="text-gray-200 hover:text-accent-400"
             />
           ) : (
-            <ArrowLeft
-              className="hover:text-primary-400 mx-2 cursor-pointer"
-              onClick={() => setOpenSideBar(!openSideBar)}
+            <ArrowRight
+              size={16}
+              className="text-gray-200 hover:text-accent-400"
             />
           )}
-        </li>
-      </ul>
-    </>
+        </button>
+      </div>
+    </div>
   );
 };
 

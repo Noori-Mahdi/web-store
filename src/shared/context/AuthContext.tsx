@@ -22,6 +22,7 @@ export type TUser = {
   email: string;
   userName: string;
   phone: string;
+  role: 'admin' | 'user'
 };
 
 export type TMainContextState = {

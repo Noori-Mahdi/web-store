@@ -1,5 +1,8 @@
+'use client';
 import { twMerge } from 'tailwind-merge';
 import { InputShadcn, Label } from '../shadcn';
+import { useState } from 'react';
+import { Eye, EyeOff } from 'lucide-react';
 
 type TInputProps = {
   type?: string;
@@ -11,6 +14,7 @@ type TInputProps = {
   required?: boolean;
   disabled?: boolean;
   readonly?: boolean;
+  showEye?: boolean;
   placeholder?: string;
   mainClassName?: string;
   labelClassName?: string;
@@ -28,6 +32,7 @@ const Input = ({
   required = false,
   disabled = false,
   readonly = false,
+  showEye = false,
   error,
   maxLength,
   mainClassName,
@@ -36,34 +41,64 @@ const Input = ({
   onChange,
   onBlur,
 }: TInputProps) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [inputType, setInputType] = useState(type);
+  const secendryIcon = showEye ? (
+    showPassword ? (
+      <Eye
+        size={12}
+        className="text-gray-200 cursor-pointer ml-2"
+        onClick={() => {
+          setShowPassword(false);
+          setInputType('text');
+        }}
+      />
+    ) : (
+      <EyeOff
+        size={12}
+        className="text-gray-200 cursor-pointer ml-2"
+        onClick={() => {
+          setShowPassword(true);
+          setInputType('password');
+        }}
+      />
+    )
+  ) : null;
+
   return (
     <div className={twMerge('flex flex-col gap-2', mainClassName)}>
-      <Label
-        htmlFor={name}
-        className={twMerge('text-gray-700 font-medium', labelClassName)}
-      >
-        {label}
-        {required && <span className="text-red-500">*</span>}
-      </Label>
-      <InputShadcn
-        id={name}
-        type={type}
-        name={name}
-        placeholder={placeholder}
-        required={required}
-        disabled={disabled}
-        readOnly={readonly}
-        value={value}
-        maxLength={maxLength}
-        onChange={(e) => onChange?.(e)}
-        onBlur={(e) => onBlur?.(e)}
-        className={twMerge(
-          'rounded-lg border-gray-300 focus:border-indigo-500 focus:ring-indigo-500',
-          inputClassName,
-        )}
-      />
+      <div className="flex justify-between items-center">
+        <Label
+          htmlFor={name}
+          className={twMerge('text-white font-medium', labelClassName)}
+        >
+          {label}
+          {required && <span className="text-yellow-500">*</span>}
+        </Label>
+        {secendryIcon}
+      </div>
+
+      <div>
+        <InputShadcn
+          id={name}
+          type={inputType}
+          name={name}
+          placeholder={placeholder}
+          required={required}
+          disabled={disabled}
+          readOnly={readonly}
+          value={value}
+          maxLength={maxLength}
+          onChange={(e) => onChange?.(e)}
+          onBlur={(e) => onBlur?.(e)}
+          className={twMerge(
+            'rounded-lg text-white font-semibold  border-neutral-700 border-2 placeholder:text-gray-200 bg-neutral-600 focus:border-yellow-400  focus:ring-yellow-400 outline-0',
+            inputClassName,
+          )}
+        />
+      </div>
       {error && error.length > 0 && (
-        <div className="text-red-500 text-sm mt-1">
+        <div className="text-yellow-500 text-sm mt-1">
           {error.map((msg, i) => (
             <p key={i}>{msg}</p>
           ))}

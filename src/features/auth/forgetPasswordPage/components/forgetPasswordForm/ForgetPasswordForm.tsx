@@ -1,6 +1,7 @@
 'use client';
+
 import { TValidationType, validateInput } from '@/src/lib/validation';
-import { login } from '@/src/services/auth';
+import { useState } from 'react';
 import Input from '@/src/shared/components/input';
 import {
   Card,
@@ -12,16 +13,12 @@ import {
 } from '@/src/shared/components/shadcn';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useContext, useState } from 'react';
-import { Context } from '@/src/shared/context/AuthContext';
 
-const LoginForm = () => {
+const ForgetPasswordForm = () => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Partial<Record<string, string[]>>>({});
   const route = useRouter();
-  const { updateUserInfo } = useContext(Context);
 
   const handleValidation = (value: string, name: TValidationType) => {
     const res = validateInput(name, value);
@@ -41,12 +38,12 @@ const LoginForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = { userEmail: email, password: password };
-
+    const data = { userEmail: email };
+    console.log(data)
     setLoading(true);
     try {
-      await login(data);
-      updateUserInfo();
+      // await login(data);
+      // updateUserInfo();
       route.push('/');
     } catch (error) {
       console.log(error);
@@ -79,22 +76,11 @@ const LoginForm = () => {
             }}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <Input
-            label="رمز عبور"
-            name="password"
-            type="password"
-            value={password}
-            required
-            showEye
-            disabled={loading}
-            error={password ? error.password : []}
-            onChange={(e) => setPassword(e.target.value)}
-          />
           <Button
             type="submit"
             className="w-full bg-yellow-400 hover:bg-yellow-300 cursor-pointer text-white font-semibold rounded-lg shadow-md transition-colors"
           >
-            ورود
+            تایید
           </Button>
         </form>
       </CardContent>
@@ -109,19 +95,9 @@ const LoginForm = () => {
             ساخت اکانت
           </Link>
         </div>
-
-        <div className="flex gap-2 justify-between text-sm text-gray-300">
-          <span>رمز عبور را فراموش کرده‌اید ؟</span>
-          <Link
-            href="/forgot-password"
-            className="text-yellow-400 hover:text-yellow-300 hover:underline font-medium"
-          >
-            بازیابی رمز عبور
-          </Link>
-        </div>
       </CardFooter>
     </Card>
   );
 };
 
-export default LoginForm;
+export default ForgetPasswordForm;

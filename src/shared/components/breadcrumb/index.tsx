@@ -9,7 +9,6 @@ import {
   BreadcrumbSeparator,
   BreadcrumbShadcn,
 } from '../shadcn';
-import Container from '../container';
 
 const Breadcrumb = () => {
   const pathname = usePathname();
@@ -22,7 +21,6 @@ const Breadcrumb = () => {
 
   return (
     <BreadcrumbShadcn>
-      <Container>
         <BreadcrumbList>
           {pathSegments.map((segment, index) => {
             const href = buildHref(index);
@@ -50,7 +48,6 @@ const Breadcrumb = () => {
             );
           })}
         </BreadcrumbList>
-      </Container>
     </BreadcrumbShadcn>
   );
 };

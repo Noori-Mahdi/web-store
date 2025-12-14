@@ -62,9 +62,9 @@ const RegisterForm = () => {
   };
 
   return (
-    <Card className="w-full max-w-md shadow-xl rounded-2xl border border-gray-200 bg-white">
-      <CardHeader className="text-center border-b border-gray-200 pb-4">
-        <CardTitle className="text-2xl font-bold">ثبت نام</CardTitle>
+    <Card className="w-full mb-8 max-w-md shadow-xl rounded-2xl border-2 bg-neutral-800/60 backdrop-blur-md border-white/10 ">
+      <CardHeader className="text-center border-b-2 border-neutral-600 pb-4">
+        <CardTitle className="text-xl font-bold text-white">ثبت نام</CardTitle>
       </CardHeader>
 
       <CardContent className="px-6 py-4">
@@ -110,6 +110,7 @@ const RegisterForm = () => {
             type="password"
             value={password}
             required
+            showEye
             disabled={loading}
             error={password ? error.password : []}
             onChange={(e) => setPassword(e.target.value)}
@@ -121,6 +122,7 @@ const RegisterForm = () => {
             type="password"
             value={passwordConfirm}
             required
+            showEye
             disabled={loading}
             error={password || passwordConfirm ? error.passwordConfirm : []}
             onChange={(e) => setPasswordConfirm(e.target.value)}
@@ -129,7 +131,7 @@ const RegisterForm = () => {
 
           <Button
             type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-md transition-colors"
+            className="w-full bg-yellow-400 hover:bg-yellow-300 cursor-pointer text-white font-semibold rounded-lg shadow-md transition-colors"
           >
             ثبت نام
           </Button>
@@ -137,11 +139,11 @@ const RegisterForm = () => {
       </CardContent>
 
       <CardFooter className="flex flex-col gap-3 px-6 pb-6">
-        <div className="flex justify-between text-sm text-gray-600">
+        <div className="flex gap-2 justify-between text-sm text-gray-300">
           <span>قبلاً ثبت‌نام کرده‌اید؟</span>
           <Link
             href="/login"
-            className="text-indigo-600 hover:underline font-medium"
+            className="text-yellow-400 hover:text-yellow-300 hover:underline font-medium"
           >
             ورود
           </Link>

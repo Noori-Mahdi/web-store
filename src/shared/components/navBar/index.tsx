@@ -17,7 +17,14 @@ const NavBar = () => {
     <nav>
       <ul className="flex gap-5 items-center text-sm font-bold">
         {links.map(({ label, href }) => {
-          const isActive = pathname === href;
+          let isActive = false;
+
+          if (href === '/') {
+            isActive = pathname === '/';
+          } else {
+            isActive = pathname.startsWith(href);
+          }
+
 
           return (
             <li
