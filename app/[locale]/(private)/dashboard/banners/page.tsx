@@ -1,5 +1,5 @@
 const Banners = () => {
-    return ( <>Banners</> );
-}
- 
+  return <>Banners</>;
+};
+
 export default Banners;

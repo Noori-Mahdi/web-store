@@ -8,9 +8,9 @@ export default function DashboardLayout({
 }) {
   return (
     <div className="flex h-full">
-        <Header/>
-        <Breadcrumb />
-        {children}
+      <Header />
+      <Breadcrumb />
+      {children}
     </div>
   );
 }

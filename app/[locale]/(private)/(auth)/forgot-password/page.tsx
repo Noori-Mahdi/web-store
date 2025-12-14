@@ -1,7 +1,7 @@
-import ForgetPasswordPage from "@/src/features/auth/forgetPasswordPage/page";
+import ForgetPasswordPage from '@/src/features/auth/forgetPasswordPage/page';
 
 const ForgotPassword = () => {
-    return ( <ForgetPasswordPage/> );
-}
- 
+  return <ForgetPasswordPage />;
+};
+
 export default ForgotPassword;

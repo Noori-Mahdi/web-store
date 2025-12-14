@@ -22,8 +22,11 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   // مقدار اولیه زبان را از localStorage می‌گیریم یا پیش‌فرض را en قرار می‌دهیم
-  const storedLanguage = typeof window !== 'undefined' ? localStorage.getItem('language') : 'en';
-  const [language, setLanguage] = useState<Language>(storedLanguage as Language || 'en');
+  const storedLanguage =
+    typeof window !== 'undefined' ? localStorage.getItem('language') : 'en';
+  const [language, setLanguage] = useState<Language>(
+    (storedLanguage as Language) || 'en',
+  );
   const router = useRouter();
   const pathname = usePathname();
 

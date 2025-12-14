@@ -7,12 +7,9 @@ import { ChevronLeft, Instagram, Send, ShoppingCart } from 'lucide-react';
 import Container from '../container';
 
 const Header = () => {
-
   return (
     <header>
-
-
-       <Container
+      <Container
         removeSpaceLeft
         removeSpaceRight
         removeSpaceBottom
@@ -42,7 +39,7 @@ const Header = () => {
             <Instagram size={20} className="cursor-pointer" />
           </div>
         </Container>
-      </Container> 
+      </Container>
     </header>
   );
 };

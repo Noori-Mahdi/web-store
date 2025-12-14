@@ -1,6 +1,5 @@
 import AppHeader from '@/src/shared/components/appHeader';
 
-
 export default function DashboardLayout({
   children,
 }: {
@@ -8,8 +7,8 @@ export default function DashboardLayout({
 }) {
   return (
     <div className="flex flex-col flex-1">
-        <AppHeader/>
-        {children}
+      <AppHeader />
+      {children}
     </div>
   );
 }

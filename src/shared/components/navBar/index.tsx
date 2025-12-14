@@ -25,7 +25,6 @@ const NavBar = () => {
             isActive = pathname.startsWith(href);
           }
 
-
           return (
             <li
               key={href}

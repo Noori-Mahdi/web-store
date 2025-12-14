@@ -39,7 +39,7 @@ const ForgetPasswordForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = { userEmail: email };
-    console.log(data)
+    console.log(data);
     setLoading(true);
     try {
       // await login(data);
