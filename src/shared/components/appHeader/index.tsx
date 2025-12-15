@@ -55,7 +55,7 @@ const AppHeader = () => {
 
           <BottomNavigation isDesktop className="hidden flex-1 md:block" />
         </div>
-        <div className='hidden md:flex gap-2 items-center'>
+        <div className="hidden md:flex gap-2 items-center">
           <Label className="font-semibold text-xl">WS</Label>
           <Image alt="" width={70} height={70} src={'/image/logo.png'} />
         </div>
