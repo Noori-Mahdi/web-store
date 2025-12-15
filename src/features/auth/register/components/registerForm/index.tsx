@@ -10,6 +10,7 @@ import {
   CardFooter,
   Button,
 } from '@/src/shared/components/shadcn';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -22,7 +23,7 @@ const RegisterForm = () => {
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [loading, setLoading] = useState(false);
   const route = useRouter();
-
+  const t = useTranslations();
   const [error, setError] = useState<Partial<Record<string, string[]>>>({});
 
   const handleValidation = (value: string, name: TValidationType) => {
@@ -62,15 +63,11 @@ const RegisterForm = () => {
   };
 
   return (
-    <Card className="w-full mb-8 max-w-md shadow-xl rounded-2xl border-2 bg-neutral-800/60 backdrop-blur-md border-white/10 ">
-      <CardHeader className="text-center border-b-2 border-neutral-600 pb-4">
-        <CardTitle className="text-xl font-bold text-white">ثبت نام</CardTitle>
-      </CardHeader>
-
+    <Card className="w-full mb-8 max-w-md shadow-xl rounded-2xl border-2 border-border bg-background backdrop-blur-md  ">
       <CardContent className="px-6 py-4">
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <Input
-            label="نام کاربری"
+            label="userName"
             name="userName"
             value={userName}
             required
@@ -80,7 +77,7 @@ const RegisterForm = () => {
           />
 
           <Input
-            label="ایمیل"
+            label="email"
             name="email"
             type="email"
             value={email}
@@ -93,7 +90,7 @@ const RegisterForm = () => {
           />
 
           <Input
-            label="شماره تماس"
+            label="phone"
             name="phone"
             value={phone}
             placeholder="09123456789"
@@ -105,7 +102,7 @@ const RegisterForm = () => {
           />
 
           <Input
-            label="رمز عبور"
+            label="password"
             name="password"
             type="password"
             value={password}
@@ -117,7 +114,7 @@ const RegisterForm = () => {
             onBlur={(e) => handleValidation(e.target.value, 'password')}
           />
           <Input
-            label="تایید رمز عبور"
+            label="passwordConfirm"
             name="passwordConfirm"
             type="password"
             value={passwordConfirm}
@@ -131,21 +128,21 @@ const RegisterForm = () => {
 
           <Button
             type="submit"
-            className="w-full bg-yellow-400 hover:bg-yellow-300 cursor-pointer text-white font-semibold rounded-lg shadow-md transition-colors"
+            className="w-full cursor-pointer font-semibold rounded-lg shadow-md transition-colors"
           >
-            ثبت نام
+            {t('register')}
           </Button>
         </form>
       </CardContent>
 
       <CardFooter className="flex flex-col gap-3 px-6 pb-6">
-        <div className="flex gap-2 justify-between text-sm text-gray-300">
-          <span>قبلاً ثبت‌نام کرده‌اید؟</span>
+        <div className="flex gap-2 justify-between text-sm ">
+          <span>{t('already registered ?')}</span>
           <Link
             href="/login"
-            className="text-yellow-400 hover:text-yellow-300 hover:underline font-medium"
+            className="\ hover:underline font-medium text-primary"
           >
-            ورود
+            {t('enter')}
           </Link>
         </div>
       </CardFooter>

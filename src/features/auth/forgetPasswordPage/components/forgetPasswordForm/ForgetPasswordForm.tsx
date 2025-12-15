@@ -13,12 +13,14 @@ import {
 } from '@/src/shared/components/shadcn';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 const ForgetPasswordForm = () => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Partial<Record<string, string[]>>>({});
   const route = useRouter();
+  const t = useTranslations();
 
   const handleValidation = (value: string, name: TValidationType) => {
     const res = validateInput(name, value);
@@ -53,21 +55,14 @@ const ForgetPasswordForm = () => {
   };
 
   return (
-    <Card className="w-full max-w-md shadow-xl rounded-2xl bg-neutral-800/60 backdrop-blur-md border-2 border-white/10 ">
-      <CardHeader className="text-center border-b-2 border-neutral-600 pb-4">
-        <CardTitle className="text-xl font-bold text-white">
-          ورود به حساب کاربری
-        </CardTitle>
-      </CardHeader>
-
+    <Card className="w-full max-w-md shadow-xl rounded-2xl  backdrop-blur-md border-2 ">
       <CardContent className="px-6 py-4">
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <Input
-            label="ایمیل"
+            label="email"
             name="email"
             type="email"
             value={email}
-            placeholder="example@gmail.com"
             required
             disabled={loading}
             error={email ? error.email : []}
@@ -78,21 +73,21 @@ const ForgetPasswordForm = () => {
           />
           <Button
             type="submit"
-            className="w-full bg-yellow-400 hover:bg-yellow-300 cursor-pointer text-white font-semibold rounded-lg shadow-md transition-colors"
+            className="w-full cursor-pointer font-bold rounded-lg shadow-md transition-colors"
           >
-            تایید
+            {t('send')}
           </Button>
         </form>
       </CardContent>
 
       <CardFooter className="flex flex-col gap-3 px-6 pb-6">
-        <div className="flex gap-2 justify-between text-sm text-gray-300">
-          <span>حساب کاربری ندارم ؟</span>
+        <div className="flex gap-2 justify-between text-sm ">
+          <span>{t('no account yet ?')}</span>
           <Link
             href="/register"
-            className="text-yellow-400 hover:text-yellow-300 hover:underline font-medium"
+            className=" hover:underline text-primary font-medium"
           >
-            ساخت اکانت
+            {t('create account')}
           </Link>
         </div>
       </CardFooter>

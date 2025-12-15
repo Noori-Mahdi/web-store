@@ -18,7 +18,7 @@ const SideDrawer = ({ list, className }: TSideDrawerProps) => {
   return (
     <div className={twMerge('flex', className)}>
       {/* Mobile Drawer */}
-      <ul className="md:hidden bg-bg-primary border-primary-700 z-20 flex flex-1 rounded-md border text-gray-50 shadow-md">
+      <ul className="md:hidden bg-background  border-primary-700 z-20 flex flex-1 rounded-md border text-gray-50 shadow-md">
         {list.map((e) => (
           <li key={e.name} className="w-full">
             <Link

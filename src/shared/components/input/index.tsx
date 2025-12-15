@@ -1,8 +1,9 @@
 'use client';
-import { twMerge } from 'tailwind-merge';
 import { InputShadcn, Label } from '../shadcn';
 import { useState } from 'react';
-import { Eye, EyeOff } from 'lucide-react';
+import { CircleAlert, Eye, EyeOff } from 'lucide-react';
+import { cn } from '@/src/lib/utils';
+import { useTranslations } from 'next-intl';
 
 type TInputProps = {
   type?: string;
@@ -43,11 +44,12 @@ const Input = ({
 }: TInputProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [inputType, setInputType] = useState(type);
+  const t = useTranslations();
   const secendryIcon = showEye ? (
     showPassword ? (
       <Eye
         size={12}
-        className="text-gray-200 cursor-pointer ml-2"
+        className=" cursor-pointer ml-2"
         onClick={() => {
           setShowPassword(false);
           setInputType('text');
@@ -56,7 +58,7 @@ const Input = ({
     ) : (
       <EyeOff
         size={12}
-        className="text-gray-200 cursor-pointer ml-2"
+        className=" cursor-pointer ml-2"
         onClick={() => {
           setShowPassword(true);
           setInputType('password');
@@ -66,15 +68,14 @@ const Input = ({
   ) : null;
 
   return (
-    <div className={twMerge('flex flex-col gap-2', mainClassName)}>
+    <div className={cn('flex flex-col gap-2', mainClassName)}>
       <div className="flex justify-between items-center">
-        <Label
-          htmlFor={name}
-          className={twMerge('text-white font-medium', labelClassName)}
-        >
-          {label}
-          {required && <span className="text-yellow-500">*</span>}
-        </Label>
+        {label && (
+          <Label htmlFor={name} className={cn(' font-medium', labelClassName)}>
+            {t(label)}
+            {required && <span className="text-primary">*</span>}
+          </Label>
+        )}
         {secendryIcon}
       </div>
 
@@ -91,16 +92,19 @@ const Input = ({
           maxLength={maxLength}
           onChange={(e) => onChange?.(e)}
           onBlur={(e) => onBlur?.(e)}
-          className={twMerge(
-            'rounded-lg text-white font-semibold  border-neutral-700 border-2 placeholder:text-gray-200 bg-neutral-600 focus:border-yellow-400  focus:ring-yellow-400 outline-0',
+          className={cn(
+            'rounded-lg font-semibold border-2 outline-0',
             inputClassName,
           )}
         />
       </div>
       {error && error.length > 0 && (
-        <div className="text-yellow-500 text-sm mt-1">
+        <div className="text-sm text-primary mt-1">
           {error.map((msg, i) => (
-            <p key={i}>{msg}</p>
+            <div className="flex gap-2 items-center text-destructive" key={i}>
+              <CircleAlert size={13} />
+              <p>{msg}</p>
+            </div>
           ))}
         </div>
       )}

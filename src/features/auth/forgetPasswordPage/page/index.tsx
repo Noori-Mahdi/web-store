@@ -2,9 +2,7 @@ import ForgetPasswordForm from '../components/forgetPasswordForm/ForgetPasswordF
 
 const ForgetPasswordPage = () => {
   return (
-    <div className=" flex items-start justify-center flex-1 p-4">
       <ForgetPasswordForm />
-    </div>
   );
 };
 

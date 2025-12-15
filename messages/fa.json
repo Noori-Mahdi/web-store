@@ -1,3 +1,22 @@
 {
-  "forgot-password": "فراموشی رمز"
+  "home": "صفحه اصلی",
+  "store": "فروشگاه",
+  "basket": "سبد خرید",
+  "dashboard": "داشبورد",
+  "profile": "پروفایل",
+  "login": "ورود",
+  "send": "ارسال",
+  "phone": "شماره همراه",
+  "email": "نامه الکترونیکی",
+  "userName": "نام کاربری",
+  "register": "ثبت نام",
+  "password": "رمز عبور",
+  "enter": "ورود",
+  "passwordConfirm": "تایید رمز",
+  "forgot-password": "فراموشی رمز عبور",
+  "recover password": "بازیابی رمز عبور",
+  "already registered ?": "قبلا ثبت نام کرده اید ؟",
+  "forgot your password ?": "رمز عبور را فراموش کرده‌اید ؟",
+  "no account yet ?": "حساب کاربری ندارید؟",
+  "create account": "ساخت حساب"
 }

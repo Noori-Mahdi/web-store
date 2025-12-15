@@ -1,3 +1,22 @@
 {
-  "forgot-password": "Forget Password"
+  "home": "Home",
+  "store": "Store",
+  "basket": "Basket",
+  "register": "Register",
+  "dashboard": "Dashboard",
+  "profile": "Profile",
+  "login": "Login",
+  "send": "Send",
+  "userName": "User name",
+  "phone": "Phone",
+  "email": "Email",
+  "password": "Password",
+  "passwordConfirm": "Password confirm",
+  "already registered ?":"Already registered ?",
+  "enter": "Enter",
+  "forgot-password": "Forgot Password",
+  "forgot your password ?": "Forgot your password ",
+  "recover password": "Recover password",
+  "no account yet ?": "Don't have an account ?",
+  "create account": "Create Account"
 }
