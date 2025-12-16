@@ -8,9 +8,12 @@
   "send": "ارسال",
   "phone": "شماره همراه",
   "email": "نامه الکترونیکی",
+  "followUs": "ما را دنبال کنید",
   "userName": "نام کاربری",
   "register": "ثبت نام",
   "password": "رمز عبور",
+  "aboutUs": "درباره ما",
+  "contactUs": "ارتباط با ما",
   "enter": "ورود",
   "passwordConfirm": "تایید رمز",
   "forgot-password": "فراموشی رمز عبور",
@@ -18,5 +21,6 @@
   "already registered ?": "قبلا ثبت نام کرده اید ؟",
   "forgot your password ?": "رمز عبور را فراموش کرده‌اید ؟",
   "no account yet ?": "حساب کاربری ندارید؟",
-  "create account": "ساخت حساب"
+  "create account": "ساخت حساب",
+  "welcome to web store, your online clothing store": "به وییب استور خوش آمدید، فروشگاه آنلاین پوشاک شما"
 }

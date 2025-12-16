@@ -10,7 +10,10 @@
   "userName": "User name",
   "phone": "Phone",
   "email": "Email",
+  "followUs": "Follow us",
   "password": "Password",
+  "aboutUs": "About us",
+  "contactUs": "Contact us",
   "passwordConfirm": "Password confirm",
   "already registered ?": "Already registered ?",
   "enter": "Enter",
@@ -18,5 +21,6 @@
   "forgot your password ?": "Forgot your password ",
   "recover password": "Recover password",
   "no account yet ?": "Don't have an account ?",
-  "create account": "Create Account"
+  "create account": "Create Account",
+  "welcome to web store, your online clothing store": "Welcome to Weeb Store, your online clothing store."
 }

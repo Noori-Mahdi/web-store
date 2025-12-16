@@ -5,7 +5,6 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import LanguageSwitcher from '../LanguageButton';
 import { ModeToggle } from '../themeButton';
-import { Button } from '../shadcn';
 import Link from 'next/link';
 import BottomNavigation from '../bottomNavigation';
 import Image from 'next/image';
@@ -18,8 +17,8 @@ const AppHeader = () => {
   const basePath = pathname.split('/')[2];
   return (
     <header>
-      <Container className="flex items-center md:justify-between justify-center ">
-        <div className=" relative w-full max-w-[444px] md:max-w-[775px]  gap-3 flex items-center justify-between">
+      <Container className="flex items-center gap-2 md:justify-between justify-center ">
+        <div className=" relative w-full max-w-[444px] md:max-w-[775px] md:min-w-[600px]  gap-3 flex items-center justify-between">
           {/* mobile */}
           <div className="flex gap-2 md:hidden">
             <LanguageSwitcher />
@@ -55,7 +54,7 @@ const AppHeader = () => {
 
           <BottomNavigation isDesktop className="hidden flex-1 md:block" />
         </div>
-        <div className="hidden md:flex gap-2 items-center">
+        <div className="hidden md:flex gap-2 min-w-[100px] items-center">
           <Label className="font-semibold text-xl">WS</Label>
           <Image alt="" width={70} height={70} src={'/image/logo.png'} />
         </div>
