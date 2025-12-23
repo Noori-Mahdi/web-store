@@ -1,57 +1,50 @@
-import { z } from 'zod';
+import z from 'zod';
+import { AuthRules } from '../features/auth/domain/auth.rules';
 
 export type TValidationType =
-  | 'phone'
+  | 'mobile'
   | 'email'
   | 'password'
   | 'passwordConfirm';
 
-type TValidationResult = {
+export type TValidationResult = {
   isValid: boolean;
-  message: string[] | [];
+  message: string[];
 };
 
 export function validateInput(
-  typeValidation: TValidationType,
-  value: string | number,
-  valuesMatch?: string | number,
+  type: TValidationType,
+  value: string,
+  valuesMatch?: string,
 ): TValidationResult {
-  const schema =
-    typeValidation === 'phone'
-      ? z.string().regex(/^09\d{9}$/, { message: 'شماره موبایل معتبر نیست' })
-      : typeValidation === 'email'
-        ? z.string().refine((v) => /\S+@\S+\.\S+/.test(v), {
-            message: 'ایمیل معتبر نیست',
-          })
-        : typeValidation === 'password'
-          ? z
-              .string()
-              .min(8, { message: 'رمز عبور باید حداقل ۸ کاراکتر باشد' })
-              .refine((v) => /[A-Z]/.test(v), {
-                message: 'رمز عبور باید حداقل یک حرف بزرگ داشته باشد',
-              })
-              .refine((v) => /[a-z]/.test(v), {
-                message: 'رمز عبور باید حداقل یک حرف کوچک داشته باشد',
-              })
-              .refine((v) => /\d/.test(v), {
-                message: 'رمز عبور باید حداقل یک عدد داشته باشد',
-              })
-          : typeValidation === 'passwordConfirm' && valuesMatch
-            ? z.string().refine((value) => value === valuesMatch, {
-                message: 'رمز عبورها یکسان نیستند',
-              })
-            : z.string();
+  let schema: z.ZodTypeAny;
 
-  if (!schema) {
-    return { isValid: false, message: ['نوع ولیدیشن نامعتبر است'] };
+  switch (type) {
+    case 'mobile':
+      schema = AuthRules.mobile;
+      break;
+    case 'email':
+      schema = AuthRules.email;
+      break;
+    case 'password':
+      schema = AuthRules.password;
+      break;
+    case 'passwordConfirm':
+      if (!valuesMatch) {
+        return { isValid: false, message: ['PASSWORDS_NOT_MATCH'] };
+      }
+      schema = AuthRules.passwordConfirm(valuesMatch);
+      break;
+    default:
+      return { isValid: false, message: ['INVALID_TYPE'] };
   }
 
   const result = schema.safeParse(value);
 
   if (!result.success) {
-    const messages = result.error.issues.map((issue) => issue.message);
+    const messages = result.error.issues.map((i) => i.message);
     return { isValid: false, message: messages };
   }
 
-  return { isValid: false, message: [] };
+  return { isValid: true, message: [] };
 }

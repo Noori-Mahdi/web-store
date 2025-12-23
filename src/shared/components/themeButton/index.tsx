@@ -3,21 +3,35 @@
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { Button } from '../shadcn';
+import { cn } from '@/src/lib/utils';
 
-export function ModeToggle() {
-  const { theme, setTheme } = useTheme();
+export function ModeToggle({ className }: { className: string }) {
+  const { resolvedTheme, setTheme } = useTheme();
+
+  // فقط روی کلاینت رندر می‌کنیم
+  if (typeof window === 'undefined') return null;
 
   const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
+    const nextTheme = resolvedTheme === 'dark' ? 'light' : 'dark';
+
+    setTheme(nextTheme);
+
+    document.cookie = `theme=${nextTheme}; path=/; max-age=31536000`;
   };
 
   return (
     <Button
       onClick={toggleTheme}
-      className="flex w-9 h-9  border border-border cursor-pointer items-center justify-center p-2 font-semibold text-sm"
+      className={cn(
+        'flex w-8 h-8 border border-border items-center justify-center p-2',
+        className,
+      )}
     >
-      <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-      <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+      {resolvedTheme === 'dark' ? (
+        <Sun className="h-[1.2rem] w-[1.2rem]" />
+      ) : (
+        <Moon className="h-[1.2rem] w-[1.2rem]" />
+      )}
     </Button>
   );
 }

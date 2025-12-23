@@ -1,18 +1,21 @@
+'use client';
+
+import { cn } from '@/src/lib/utils';
 import { useLanguage } from '../../context/LanguageContext';
 import { Button } from '../shadcn';
 
-const LanguageButton = () => {
+const LanguageButton = ({ className }: { className: string }) => {
   const { language, setLanguage } = useLanguage();
+
+  // فقط روی کلاینت رندر می‌کنیم
+  if (typeof window === 'undefined') return null;
 
   const toggleLanguage = () => {
     setLanguage(language === 'en' ? 'fa' : 'en');
   };
 
   return (
-    <Button
-      className="flex w-9 h-9 text-foreground bg-background hover:text-black  border cursor-pointer items-center justify-center p-2 font-semibold text-sm"
-      onClick={toggleLanguage}
-    >
+    <Button className={cn('w-8 h-8', className)} onClick={toggleLanguage}>
       {language}
     </Button>
   );

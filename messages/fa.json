@@ -6,7 +6,8 @@
   "profile": "پروفایل",
   "login": "ورود",
   "send": "ارسال",
-  "phone": "شماره همراه",
+  "phone": "شماره ثابت",
+  "mobile": "شماره همراه",
   "email": "نامه الکترونیکی",
   "followUs": "ما را دنبال کنید",
   "userName": "نام کاربری",
@@ -22,5 +23,36 @@
   "forgot your password ?": "رمز عبور را فراموش کرده‌اید ؟",
   "no account yet ?": "حساب کاربری ندارید؟",
   "create account": "ساخت حساب",
-  "welcome to web store, your online clothing store": "به وییب استور خوش آمدید، فروشگاه آنلاین پوشاک شما"
+  "welcome to web store, your online clothing store": "به وییب استور خوش آمدید، فروشگاه آنلاین پوشاک شما",
+  "TOKEN_MISSING_OR_INVALID": "شما مجوز دسترسی ندارید.",
+  "TOKEN_INVALID_OR_EXPIRED": "نشست شما منقضی شده است. لطفاً دوباره وارد شوید.",
+  "USER_NOT_FOUND": "کاربر پیدا نشد.",
+  "INTERNAL_SERVER_ERROR": "مشکلی در سرور رخ داده است. لطفاً بعداً دوباره تلاش کنید.",
+  "EMAIL_AND_PASSWORD_REQUIRED": "ایمیل و رمز عبور الزامی است.",
+  "INVALID_PASSWORD": "رمز عبور اشتباه است.",
+  "LOGIN_SUCCESS": "خوش آمدید! ورود شما با موفقیت انجام شد.",
+  "LOGOUT_SUCCESS": "خروج شما با موفقیت انجام شد.",
+  "USERNAME_REQUIRED": "نام کاربری الزامی است.",
+  "EMAIL_REQUIRED": "ایمیل الزامی است.",
+  "PHONE_REQUIRED": "شماره تلفن الزامی است.",
+  "PASSWORD_REQUIRED": "پسورد الزامی است.",
+  "USER_ALREADY_EXISTS": "کاربری با این اطلاعات قبلاً ثبت شده است.",
+  "REGISTER_SUCCESS": "ثبت‌نام با موفقیت انجام شد.",
+
+  "MOBILE_INVALID": "شماره موبایل معتبر نیست.",
+  "EMAIL_INVALID": "ایمیل معتبر نیست.",
+  "PASSWORD_MIN_LENGTH": "رمز عبور باید حداقل ۸ کاراکتر باشد.",
+  "PASSWORD_UPPERCASE_REQUIRED": "رمز عبور باید حداقل یک حرف بزرگ داشته باشد.",
+  "PASSWORD_LOWERCASE_REQUIRED": "رمز عبور باید حداقل یک حرف کوچک داشته باشد.",
+  "PASSWORD_NUMBER_REQUIRED": "رمز عبور باید حداقل یک عدد داشته باشد.",
+  "PASSWORDS_NOT_MATCH": "رمز عبورها یکسان نیستند.",
+
+  "OTP_INVALID_LENGTH": "کد باید 5 رقم باشد.",
+  "OTP_INVALID_FORMAT": "کد باید فقط شامل عدد باشد.",
+
+  "OTP_EXPIRED": "زمان شما به پایان رسیده",
+  "OTP_INVALID_CODE": "کد اشتباه است",
+  "OTP_NOT_REQUESTED": "برای این شماره کدی درخواست نشده",
+
+  "REQUEST_SUCCESSFUL": "درخواست با موفقیت ارسال شد."
 }

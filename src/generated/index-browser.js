@@ -116,6 +116,26 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable',
 });
 
+exports.Prisma.OtpScalarFieldEnum = {
+  id: 'id',
+  mobile: 'mobile',
+  code: 'code',
+  createdAt: 'createdAt',
+};
+
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  userName: 'userName',
+  email: 'email',
+  mobile: 'mobile',
+  password: 'password',
+  ban: 'ban',
+  role: 'role',
+  avatarUrl: 'avatarUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+};
+
 exports.Prisma.ProductScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -129,18 +149,6 @@ exports.Prisma.ImageScalarFieldEnum = {
   id: 'id',
   image: 'image',
   productId: 'productId',
-};
-
-exports.Prisma.UserScalarFieldEnum = {
-  id: 'id',
-  userName: 'userName',
-  email: 'email',
-  phone: 'phone',
-  password: 'password',
-  role: 'role',
-  avatarUrl: 'avatarUrl',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
 };
 
 exports.Prisma.AddressScalarFieldEnum = {
@@ -165,6 +173,11 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last',
 };
+exports.UserRole = exports.$Enums.UserRole = {
+  user: 'user',
+  admin: 'admin',
+};
+
 exports.ProductCategory = exports.$Enums.ProductCategory = {
   MOBILE: 'MOBILE',
   LAPTOP: 'LAPTOP',
@@ -172,15 +185,11 @@ exports.ProductCategory = exports.$Enums.ProductCategory = {
   OTHER: 'OTHER',
 };
 
-exports.UserRole = exports.$Enums.UserRole = {
-  user: 'user',
-  admin: 'admin',
-};
-
 exports.Prisma.ModelName = {
+  Otp: 'Otp',
+  User: 'User',
   Product: 'Product',
   Image: 'Image',
-  User: 'User',
   Address: 'Address',
 };
 

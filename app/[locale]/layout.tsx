@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import '../globals.css';
-import UIWrapper from '@/src/provider/UIWrapper';
 import MainContext from '@/src/shared/context/AuthContext';
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { routing } from '../../src/i18n/routing';
 import { LanguageProvider } from '@/src/shared/context/LanguageContext';
 import { ThemeProvider } from '@/src/provider/theme-provider';
+import { ToastProvider } from '@/src/shared/context/ToastContext';
+import { notFound } from 'next/navigation';
+import { cookies } from 'next/headers';
 
 type Props = {
   children: React.ReactNode;
@@ -31,26 +33,34 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children, params }: Props) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {
+    notFound();
   }
+
+  const cookieStore = await cookies();
+  const theme = cookieStore.get('theme')?.value ?? 'dark';
+
+  console.log(theme, 'sssssssss');
+
+  const isRTL = locale === 'fa';
   return (
-    <html lang="fa" dir="rtl" suppressHydrationWarning>
+    <html lang={locale} dir={isRTL ? 'rtl' : 'ltr'} suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <MainContext>
-          <NextIntlClientProvider>
-            <LanguageProvider>
+        <NextIntlClientProvider>
+          <LanguageProvider>
+            <ToastProvider>
               <ThemeProvider
                 attribute="class"
-                defaultTheme="system"
+                defaultTheme={theme}
                 enableSystem
                 disableTransitionOnChange
               >
-                <UIWrapper>{children}</UIWrapper>{' '}
+                <MainContext>{children}</MainContext>
               </ThemeProvider>
-            </LanguageProvider>
-          </NextIntlClientProvider>
-        </MainContext>
+            </ToastProvider>
+          </LanguageProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

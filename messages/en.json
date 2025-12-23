@@ -9,6 +9,7 @@
   "send": "Send",
   "userName": "User name",
   "phone": "Phone",
+  "mobile": "mobile",
   "email": "Email",
   "followUs": "Follow us",
   "password": "Password",
@@ -22,5 +23,36 @@
   "recover password": "Recover password",
   "no account yet ?": "Don't have an account ?",
   "create account": "Create Account",
-  "welcome to web store, your online clothing store": "Welcome to Weeb Store, your online clothing store."
+  "welcome to web store, your online clothing store": "Welcome to Weeb Store, your online clothing store.",
+  "TOKEN_MISSING_OR_INVALID": "Please log in to continue.",
+  "TOKEN_INVALID_OR_EXPIRED": "Please log in again.",
+  "USER_NOT_FOUND": "User not found.",
+  "INTERNAL_SERVER_ERROR": "Something went wrong.",
+  "EMAIL_AND_PASSWORD_REQUIRED": "Please enter your email and password.",
+  "INVALID_PASSWORD": "Invalid credentials.",
+  "LOGIN_SUCCESS": "Welcome! You have successfully logged in.",
+  "LOGOUT_SUCCESS": "You have successfully logged out.",
+  "USERNAME_REQUIRED": "Username is required.",
+  "EMAIL_REQUIRED": "Email is required.",
+  "PHONE_REQUIRED": "Phone number is required.",
+  "PASSWORD_REQUIRED": "Password is required.",
+  "USER_ALREADY_EXISTS": "User already exists.",
+  "REGISTER_SUCCESS": "You have successfully registered.",
+
+  "MOBILE_INVALID": "Mobile number is not valid.",
+  "EMAIL_INVALID": "Email is not valid.",
+  "PASSWORD_MIN_LENGTH": "Password must be at least 8 characters.",
+  "PASSWORD_UPPERCASE_REQUIRED": "Password must contain at least one uppercase letter.",
+  "PASSWORD_LOWERCASE_REQUIRED": "Password must contain at least one lowercase letter.",
+  "PASSWORD_NUMBER_REQUIRED": "Password must contain at least one number.",
+  "PASSWORDS_NOT_MATCH": "Passwords do not match.",
+
+  "OTP_INVALID_LENGTH": "The code must be 5 digits.",
+  "OTP_INVALID_FORMAT": "The code must only contain numbers.",
+
+  "OTP_EXPIRED": "Your time has expired",
+  "OTP_INVALID_CODE": "The code is incorrect",
+  "OTP_NOT_REQUESTED": "No OTP code has been requested for this number",
+
+  "REQUEST_SUCCESSFUL": "Request sent successfully."
 }

@@ -3,7 +3,7 @@ import SearchInput from '../searchInput';
 import NavBar from '../navBar';
 import Profile from '../Profile';
 import { Badge, Button } from '../shadcn';
-import { ChevronLeft, Instagram, Send, ShoppingCart } from 'lucide-react';
+import { Instagram, Send, ShoppingCart } from 'lucide-react';
 import Container from '../container';
 
 const Header = () => {
