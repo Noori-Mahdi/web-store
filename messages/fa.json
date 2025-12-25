@@ -1,10 +1,12 @@
 {
   "home": "صفحه اصلی",
+  "web": "اینترنتی",
   "store": "فروشگاه",
   "basket": "سبد خرید",
   "dashboard": "داشبورد",
   "profile": "پروفایل",
   "login": "ورود",
+  "code": "کد",
   "send": "ارسال",
   "phone": "شماره ثابت",
   "mobile": "شماره همراه",
@@ -39,6 +41,10 @@
   "USER_ALREADY_EXISTS": "کاربری با این اطلاعات قبلاً ثبت شده است.",
   "REGISTER_SUCCESS": "ثبت‌نام با موفقیت انجام شد.",
 
+  "FIRST_FORM_NO_BACK": "این فرم مرحله اول است و امکان بازگشت وجود ندارد.",
+  "CODE_SENT_SUCCESS": "کد برای شما ارسال شد.",
+  "CODE_RESENT_SUCCESS": "کد دوباره برای شما ارسال شد.",
+
   "MOBILE_INVALID": "شماره موبایل معتبر نیست.",
   "EMAIL_INVALID": "ایمیل معتبر نیست.",
   "PASSWORD_MIN_LENGTH": "رمز عبور باید حداقل ۸ کاراکتر باشد.",
@@ -50,9 +56,15 @@
   "OTP_INVALID_LENGTH": "کد باید 5 رقم باشد.",
   "OTP_INVALID_FORMAT": "کد باید فقط شامل عدد باشد.",
 
+  "OTP_RESEND": "ارسال مجدد",
+  "OTP_ACCOUNTS_WITH_MOBILE": "حساب‌های کاربری با این شماره:",
+  "OTP_LOGIN_WITH_NEW_ACCOUNT": "با حساب جدید",
+
   "OTP_EXPIRED": "زمان شما به پایان رسیده",
+  "OTP_NOT_EXPIRED": "شما هنوز برای ارسال کد زمان دارید",
   "OTP_INVALID_CODE": "کد اشتباه است",
   "OTP_NOT_REQUESTED": "برای این شماره کدی درخواست نشده",
+  "OTP_VERIFIED": "کد با موفقیت تأیید شد.",
 
   "REQUEST_SUCCESSFUL": "درخواست با موفقیت ارسال شد."
 }

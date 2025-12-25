@@ -3,17 +3,19 @@ import Input from '@/src/shared/components/input';
 import {
   Card,
   CardContent,
-  CardFooter,
   Button,
+  Spinner,
 } from '@/src/shared/components/shadcn';
-import Link from 'next/link';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { AuthRepositoryImpl } from '@/src/features/auth/data/AuthRepositoryImpl.ts';
 import { OTP } from '@/src/features/auth/domain/usecases';
-import { TValidationType, validateInput } from '@/src/lib/validation';
 import { TActionLogin, TLoginState } from '../LoginForms';
 import { useToast } from '@/src/shared/context/ToastContext';
+import { toEnglishNumber, toPersianNumber } from '@/src/shared/utils/numbers';
+import { validationClientHandler } from '@/src/shared/utils/validation/client/clientValidationHandler';
+import { TValidationType } from '@/src/shared/utils/validation/checkValidation';
+import { errorHandler } from '@/src/shared/utils/errorHandler';
 
 export type TLoginFormsProps = {
   state: TLoginState;
@@ -30,38 +32,33 @@ const LoginStepOne = ({ state, dispatch }: TLoginFormsProps) => {
   const { addToast } = useToast();
 
   const handleValidation = (value: string, name: TValidationType) => {
-    const res = validateInput(name, value);
-    if (res.isValid) {
-      setError((prev) => {
-        const newErr = { ...prev };
-        delete newErr[name];
-        return newErr;
-      });
-    } else {
-      setError((prev) => ({
-        ...prev,
-        [name]: res.message,
-      }));
-    }
+    validationClientHandler(value, name, setError);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = { mobile };
+    const normalizedValue = toEnglishNumber(mobile);
+
+    const data = { mobile: normalizedValue };
 
     setLoading(true);
     try {
       const repo = new AuthRepositoryImpl();
-      await OTP(repo, data);
-      dispatch({ type: 'setMobile', payload: mobile });
+      const res = await OTP(repo, data);
+      addToast(res.message, 'success');
+      dispatch({ type: 'setMobile', payload: toEnglishNumber(mobile) });
       dispatch({ type: 'setStep', payload: 2 });
-    } catch (error) {
-      console.log(error);
+    } catch (error: unknown) {
+      const res = errorHandler(error);
+      if (typeof res === 'object') {
+        setError(res);
+      } else {
+        addToast(res);
+      }
     } finally {
       setLoading(false);
     }
   };
-
   return (
     <Card className="w-full max-w-md shadow-xl rounded-2xl  backdrop-blur-md border-2 border-border bg-background ">
       <CardContent className="px-6 py-4">
@@ -70,7 +67,9 @@ const LoginStepOne = ({ state, dispatch }: TLoginFormsProps) => {
             label="mobile"
             name="mobile"
             type="mobile"
-            value={mobile}
+            maxLength={11}
+            numeric
+            value={toPersianNumber(mobile)}
             required
             disabled={loading}
             error={mobile ? error.mobile : []}
@@ -80,25 +79,15 @@ const LoginStepOne = ({ state, dispatch }: TLoginFormsProps) => {
             onChange={(e) => setMobile(e.target.value)}
           />
           <Button
+            size={'lg'}
             type="submit"
+            disabled={loading}
             className="w-full  cursor-pointer font-semibold rounded-lg shadow-md transition-colors"
           >
-            {t('enter')}
+            {loading ? <Spinner /> : t('enter')}
           </Button>
         </form>
       </CardContent>
-
-      <CardFooter className="flex flex-col gap-3 px-6 pb-6">
-        <div className="flex gap-2 justify-between text-sm ">
-          <span>{t('forgot your password ?')}</span>
-          <Link
-            href="/forgot-password"
-            className="hover:underline font-medium text-primary"
-          >
-            {t('recover password')}
-          </Link>
-        </div>
-      </CardFooter>
     </Card>
   );
 };

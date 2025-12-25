@@ -10,6 +10,7 @@ type TInputProps = {
   name: string;
   value: string;
   label?: string;
+  numeric?: boolean;
   error?: string[];
   maxLength?: number;
   required?: boolean;
@@ -35,6 +36,7 @@ const Input = ({
   readonly = false,
   showEye = false,
   error,
+  numeric = false,
   maxLength,
   mainClassName,
   labelClassName,
@@ -68,7 +70,7 @@ const Input = ({
   ) : null;
 
   return (
-    <div className={cn('flex flex-col gap-2', mainClassName)}>
+    <div className={cn('flex flex-col gap-3', mainClassName)}>
       <div className="flex justify-between items-center">
         {label && (
           <Label htmlFor={name} className={cn(' font-medium', labelClassName)}>
@@ -89,6 +91,7 @@ const Input = ({
           disabled={disabled}
           readOnly={readonly}
           value={value}
+          inputMode={numeric ? 'numeric' : 'text'}
           maxLength={maxLength}
           onChange={(e) => onChange?.(e)}
           onBlur={(e) => onBlur?.(e)}
@@ -102,8 +105,8 @@ const Input = ({
         <div className="text-sm text-primary mt-1">
           {error.map((msg, i) => (
             <div className="flex gap-2 items-center text-destructive" key={i}>
-              <CircleAlert size={13} />
-              <p>{msg}</p>
+              <CircleAlert size={16} />
+              <p className="text-sm">{t(msg)}</p>
             </div>
           ))}
         </div>

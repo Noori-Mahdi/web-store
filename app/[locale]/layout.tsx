@@ -9,6 +9,7 @@ import { ThemeProvider } from '@/src/provider/theme-provider';
 import { ToastProvider } from '@/src/shared/context/ToastContext';
 import { notFound } from 'next/navigation';
 import { cookies } from 'next/headers';
+import UIWrapper from '@/src/provider/UIWrapper';
 
 type Props = {
   children: React.ReactNode;
@@ -56,7 +57,9 @@ export default async function RootLayout({ children, params }: Props) {
                 enableSystem
                 disableTransitionOnChange
               >
-                <MainContext>{children}</MainContext>
+                <MainContext>
+                  <UIWrapper>{children}</UIWrapper>
+                </MainContext>
               </ThemeProvider>
             </ToastProvider>
           </LanguageProvider>

@@ -120,6 +120,17 @@ exports.Prisma.OtpScalarFieldEnum = {
   id: 'id',
   mobile: 'mobile',
   code: 'code',
+  expiresAt: 'expiresAt',
+  used: 'used',
+  attempts: 'attempts',
+  createdAt: 'createdAt',
+};
+
+exports.Prisma.OtpSessionScalarFieldEnum = {
+  id: 'id',
+  mobile: 'mobile',
+  apiKey: 'apiKey',
+  expiresAt: 'expiresAt',
   createdAt: 'createdAt',
 };
 
@@ -187,6 +198,7 @@ exports.ProductCategory = exports.$Enums.ProductCategory = {
 
 exports.Prisma.ModelName = {
   Otp: 'Otp',
+  OtpSession: 'OtpSession',
   User: 'User',
   Product: 'Product',
   Image: 'Image',

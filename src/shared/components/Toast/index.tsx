@@ -1,8 +1,9 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { X } from 'lucide-react';
+import { ShieldAlert, ShieldBan, ShieldCheck, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { cn } from '@/src/lib/utils';
 
 export type TToastProps = {
   id: string;
@@ -43,17 +44,26 @@ const Toast = ({ message, type, onClose }: TToastProps) => {
 
   return (
     <div className="relative w-80 bg-opacity-75 bg-neutral-800 p-2 py-3 rounded-lg shadow-lg z-50 flex items-center justify-between">
-      <div
-        className={twMerge(
-          'text-xs font-medium tracking-wide',
-          type === 'error'
-            ? 'text-red-500'
-            : type === 'warning'
-              ? 'text-yellow-500'
-              : 'text-green-500',
-        )}
-      >
-        {t(message)}
+      <div className="text-xs font-medium flex gap-3 items-start">
+        <span
+          className={cn(
+            'flex justify-center items-center p-0.5',
+            type === 'success'
+              ? 'text-green-500  border-green-500'
+              : type === 'warning'
+                ? 'text-yellow-500  border-yellow-500'
+                : 'text-red-500  border-red-500',
+          )}
+        >
+          {type === 'success' ? (
+            <ShieldCheck size={14} />
+          ) : type === 'warning' ? (
+            <ShieldAlert size={14} />
+          ) : (
+            <ShieldBan size={14} />
+          )}
+        </span>
+        <span>{t(message)}</span>
       </div>
 
       <X
@@ -70,11 +80,11 @@ const Toast = ({ message, type, onClose }: TToastProps) => {
           style={{ width: `${progress}%` }}
           className={twMerge(
             'h-full transition-[width] duration-50',
-            type === 'error'
-              ? 'bg-red-500'
+            type === 'success'
+              ? 'bg-green-500'
               : type === 'warning'
                 ? 'bg-yellow-500'
-                : 'bg-green-500',
+                : 'bg-red-500',
           )}
         />
       </div>

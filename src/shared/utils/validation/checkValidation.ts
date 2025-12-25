@@ -1,18 +1,19 @@
 import z from 'zod';
-import { AuthRules } from '../features/auth/domain/auth.rules';
+import { AuthRules } from './rules';
 
 export type TValidationType =
   | 'mobile'
   | 'email'
   | 'password'
-  | 'passwordConfirm';
+  | 'passwordConfirm'
+  | 'code';
 
 export type TValidationResult = {
   isValid: boolean;
   message: string[];
 };
 
-export function validateInput(
+export function checkValidation(
   type: TValidationType,
   value: string,
   valuesMatch?: string,
@@ -25,6 +26,9 @@ export function validateInput(
       break;
     case 'email':
       schema = AuthRules.email;
+      break;
+    case 'code':
+      schema = AuthRules.code;
       break;
     case 'password':
       schema = AuthRules.password;

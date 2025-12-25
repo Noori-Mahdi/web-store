@@ -1,34 +1,35 @@
 import { prisma } from '@/src/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
-import { AuthRules } from '@/src/features/auth/domain/auth.rules';
+import { serverValidation } from '@/src/shared/utils/validation/server/serverValidation';
 
 type TRegisterBody = {
   email: string;
   password: string;
   userName: string;
-  mobile: string;
 };
 
 export async function POST(req: NextRequest) {
   try {
-    const { userName, email, mobile, password }: TRegisterBody =
-      await req.json();
+    const { email, password, userName }: TRegisterBody = await req.json();
 
-    const emailValidation = AuthRules.email.safeParse(email);
-    const mobileValidation = AuthRules.mobile.safeParse(mobile);
+    const apiKey = req.cookies.get('apiKey')?.value;
+    if (!apiKey) {
+      return NextResponse.json({ message: 'INVALID_API_KEY' }, { status: 401 });
+    }
 
-    if (!emailValidation.success || !mobileValidation.success) {
-      const errors: Record<string, string[]> = {};
+    const session = await prisma.otpSession.findFirst({
+      where: { apiKey, expiresAt: { gt: new Date() } },
+    });
 
-      if (emailValidation.error?.issues.length) {
-        errors.email = emailValidation.error?.issues.map((i) => i.message);
-      }
+    if (!session) {
+      return NextResponse.json({ message: 'INVALID_API_KEY' }, { status: 401 });
+    }
 
-      if (mobileValidation.error?.issues.length) {
-        errors.mobile = mobileValidation.error?.issues.map((i) => i.message);
-      }
+    const mobile = session.mobile;
 
+    const errors = serverValidation({ email });
+    if (Object.keys(errors).length > 0) {
       return NextResponse.json({ message: errors }, { status: 400 });
     }
 
@@ -38,12 +39,6 @@ export async function POST(req: NextRequest) {
         { status: 400 },
       );
     }
-    if (!email) {
-      return NextResponse.json({ message: 'EMAIL_REQUIRED' }, { status: 400 });
-    }
-    if (!mobile) {
-      return NextResponse.json({ message: 'PHONE_REQUIRED' }, { status: 400 });
-    }
     if (!password) {
       return NextResponse.json(
         { message: 'PASSWORD_REQUIRED' },
@@ -51,10 +46,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const existUser = await prisma.user.findFirst({
-      where: { email },
-    });
-
+    const existUser = await prisma.user.findFirst({ where: { email } });
     if (existUser) {
       return NextResponse.json(
         { message: 'USER_ALREADY_EXISTS' },
@@ -65,19 +57,31 @@ export async function POST(req: NextRequest) {
     const salt = await bcrypt.genSalt(8);
     const hashingPassword = await bcrypt.hash(password, salt);
 
-    await prisma.user.create({
+    const user = await prisma.user.create({
       data: {
         userName,
         email,
         mobile,
         password: hashingPassword,
       },
+      select: {
+        id: true,
+        userName: true,
+        email: true,
+        mobile: true,
+      },
     });
 
-    return NextResponse.json({ message: 'REGISTER_SUCCESS' }, { status: 201 });
-  } catch (error: unknown) {
+    await prisma.otpSession.delete({ where: { apiKey } });
+
     return NextResponse.json(
-      { error: 'INTERNAL_SERVER_ERROR' },
+      { message: 'REGISTER_SUCCESS', user },
+      { status: 201 },
+    );
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { message: 'INTERNAL_SERVER_ERROR' },
       { status: 500 },
     );
   }

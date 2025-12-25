@@ -1,6 +1,7 @@
 export default class ApiRouter {
-  static OTP = '/auth/otp';
+  static OTP = '/auth/otp/send';
+  static ResendOTP = '/auth/otp/resend';
+  static OTPConfirm = '/auth/otp/verify';
   static login = '/auth/login';
-  static OTPConfirm = '/auth/otpConfirm';
   static register = '/auth/register';
 }

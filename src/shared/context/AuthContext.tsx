@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 
 import { useToast } from './ToastContext';
 import { getUserInfo } from '@/src/services/user';
-import { logout } from '@/src/services/auth';
+import { errorHandler } from '../utils/errorHandler';
 
 export type TContextReturnType = {
   user?: TUser;
@@ -48,37 +48,19 @@ const MainContext = (props: TMainContextProps) => {
     user: undefined,
   });
 
-  function isAxiosError<
-    T extends Record<string, unknown> = Record<string, unknown>,
-  >(error: unknown): error is { response?: { data?: { message?: string } } } {
-    return (
-      typeof error === 'object' &&
-      error !== null &&
-      'response' in error &&
-      typeof (error as { response?: { data?: T } }).response?.data?.message ===
-        'string'
-    );
-  }
-
   const updateUserInfo = async () => {
     try {
       await getUserInfo();
     } catch (error: unknown) {
-      if (isAxiosError(error)) {
-        addToast(error.response?.data?.message ?? 'خطای ناشناخته');
-      } else if (error instanceof Error) {
-        addToast(error.message);
-      } else {
-        addToast('خطای ناشناخته');
-      }
+      addToast(errorHandler(error));
     }
   };
 
   const handleLogout = () => {
-    logout().then(() => {
-      router.push('/');
-      setState((prevState) => ({ ...prevState, user: undefined }));
-    });
+    // logout().then(() => {
+    //   router.push('/');
+    //   setState((prevState) => ({ ...prevState, user: undefined }));
+    // });
   };
 
   const isLoggedIn = useMemo(() => {

@@ -62,7 +62,7 @@ const BottomNavigation = ({
       className={cn('fixed md:relative bottom-0 right-0 w-screen', className)}
     >
       <Container className="py-2 md:px-0">
-        <ul className="flex items-center max-w-[400px] md:max-w-[600px] m-auto md:m-0 justify-center md:gap-18 gap-5 w-full rounded-3xl p-3 bg-background backdrop-blur-md border shadow-lg">
+        <ul className="flex items-center max-w-[400px] md:max-w-[600px] m-auto md:m-0 justify-center md:gap-18 gap-7 w-full rounded-3xl p-3 bg-background backdrop-blur-md border shadow-lg">
           {links.map((e) => {
             const isActive =
               e.href === '/'

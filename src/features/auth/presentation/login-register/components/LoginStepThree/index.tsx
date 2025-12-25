@@ -1,12 +1,9 @@
 'use client';
-import { TValidationType, validateInput } from '@/src/lib/validation';
-import { register } from '@/src/services/auth';
+
 import Input from '@/src/shared/components/input';
 import {
   Card,
   CardContent,
-  CardHeader,
-  CardTitle,
   CardFooter,
   Button,
 } from '@/src/shared/components/shadcn';
@@ -15,6 +12,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { TLoginFormsProps } from '../LoginStepOne';
+import { TValidationType } from '@/src/shared/utils/validation/checkValidation';
+import { validationClientHandler } from '@/src/shared/utils/validation/client/clientValidationHandler';
+import { errorHandler } from '@/src/shared/utils/errorHandler';
+import { useToast } from '@/src/shared/context/ToastContext';
+import { AuthRepositoryImpl } from '@/src/features/auth/data/AuthRepositoryImpl.ts';
+import { register } from '@/src/features/auth/domain/usecases';
 
 const LoginStepThree = ({ state }: TLoginFormsProps) => {
   const [userName, setUserName] = useState('');
@@ -24,24 +27,12 @@ const LoginStepThree = ({ state }: TLoginFormsProps) => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Partial<Record<string, string[]>>>({});
-
+  const { addToast } = useToast();
   const route = useRouter();
   const t = useTranslations();
 
   const handleValidation = (value: string, name: TValidationType) => {
-    const res = validateInput(name, value);
-    if (res.isValid) {
-      setError((prev) => {
-        const newErr = { ...prev };
-        delete newErr[name];
-        return newErr;
-      });
-    } else {
-      setError((prev) => ({
-        ...prev,
-        [name]: res.message,
-      }));
-    }
+    validationClientHandler(value, name, setError);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -53,16 +44,21 @@ const LoginStepThree = ({ state }: TLoginFormsProps) => {
     const data = {
       userName,
       email,
-      mobile: state.mobile,
       password,
     };
 
     setLoading(true);
     try {
-      await register(data);
-      route.push('/login');
-    } catch (error) {
-      console.log(error);
+      const repo = new AuthRepositoryImpl();
+      const result = await register(repo, data);
+      addToast(result.message, 'success');
+    } catch (error: unknown) {
+      const res = errorHandler(error);
+      if (typeof res === 'object') {
+        setError(res);
+      } else {
+        addToast(res);
+      }
     } finally {
       setLoading(false);
     }

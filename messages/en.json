@@ -7,7 +7,9 @@
   "profile": "Profile",
   "login": "Login",
   "send": "Send",
+  "code": "Code",
   "userName": "User name",
+  "web": "Web",
   "phone": "Phone",
   "mobile": "mobile",
   "email": "Email",
@@ -39,6 +41,10 @@
   "USER_ALREADY_EXISTS": "User already exists.",
   "REGISTER_SUCCESS": "You have successfully registered.",
 
+  "FIRST_FORM_NO_BACK": "This is the first form and you cannot go back.",
+  "CODE_SENT_SUCCESS": "The code has been sent to you.",
+  "CODE_RESENT_SUCCESS": "The code has been resent successfully.",
+
   "MOBILE_INVALID": "Mobile number is not valid.",
   "EMAIL_INVALID": "Email is not valid.",
   "PASSWORD_MIN_LENGTH": "Password must be at least 8 characters.",
@@ -50,9 +56,15 @@
   "OTP_INVALID_LENGTH": "The code must be 5 digits.",
   "OTP_INVALID_FORMAT": "The code must only contain numbers.",
 
+  "OTP_RESEND": "Resend code",
+  "OTP_ACCOUNTS_WITH_MOBILE": "Accounts associated with this number:",
+  "OTP_LOGIN_WITH_NEW_ACCOUNT": "With a new account",
+
   "OTP_EXPIRED": "Your time has expired",
+  "OTP_NOT_EXPIRED": "You still have time before requesting a new code.",
   "OTP_INVALID_CODE": "The code is incorrect",
   "OTP_NOT_REQUESTED": "No OTP code has been requested for this number",
+  "OTP_VERIFIED": "OTP verified successfully.",
 
   "REQUEST_SUCCESSFUL": "Request sent successfully."
 }

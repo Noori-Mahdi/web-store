@@ -5,10 +5,9 @@ import { useTheme } from 'next-themes';
 import { Button } from '../shadcn';
 import { cn } from '@/src/lib/utils';
 
-export function ModeToggle({ className }: { className: string }) {
+export function ThemeButton({ className }: { className?: string }) {
   const { resolvedTheme, setTheme } = useTheme();
 
-  // فقط روی کلاینت رندر می‌کنیم
   if (typeof window === 'undefined') return null;
 
   const toggleTheme = () => {
