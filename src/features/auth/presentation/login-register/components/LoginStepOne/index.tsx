@@ -60,7 +60,7 @@ const LoginStepOne = ({ state, dispatch }: TLoginFormsProps) => {
     }
   };
   return (
-    <Card className="w-full max-w-md shadow-xl rounded-2xl  backdrop-blur-md border-2 border-border bg-background ">
+    <Card className="w-full shadow-xl rounded-2xl  backdrop-blur-md border-2 border-border bg-background ">
       <CardContent className="px-6 py-4">
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <Input
@@ -81,10 +81,11 @@ const LoginStepOne = ({ state, dispatch }: TLoginFormsProps) => {
           <Button
             size={'lg'}
             type="submit"
+            loading={loading}
             disabled={loading}
             className="w-full  cursor-pointer font-semibold rounded-lg shadow-md transition-colors"
           >
-            {loading ? <Spinner /> : t('enter')}
+            {t('enter')}
           </Button>
         </form>
       </CardContent>

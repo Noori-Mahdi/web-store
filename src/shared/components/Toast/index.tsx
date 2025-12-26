@@ -43,7 +43,7 @@ const Toast = ({ message, type, onClose }: TToastProps) => {
   if (!visible || !message) return null;
 
   return (
-    <div className="relative w-80 bg-opacity-75 bg-neutral-800 p-2 py-3 rounded-lg shadow-lg z-50 flex items-center justify-between">
+    <div className="relative w-80  bg-neutral-800 p-2 py-3 rounded-lg shadow-lg z-50 flex items-center justify-between">
       <div className="text-xs font-medium flex gap-3 items-start">
         <span
           className={cn(

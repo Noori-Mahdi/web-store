@@ -45,29 +45,31 @@ const Input = ({
   onBlur,
 }: TInputProps) => {
   const [showPassword, setShowPassword] = useState(false);
-  const [inputType, setInputType] = useState(type);
   const t = useTranslations();
-  const secendryIcon = showEye ? (
-    showPassword ? (
-      <Eye
-        size={12}
-        className=" cursor-pointer ml-2"
-        onClick={() => {
-          setShowPassword(false);
-          setInputType('text');
-        }}
-      />
-    ) : (
-      <EyeOff
-        size={12}
-        className=" cursor-pointer ml-2"
-        onClick={() => {
-          setShowPassword(true);
-          setInputType('password');
-        }}
-      />
-    )
-  ) : null;
+
+  const resolvedType =
+    showEye && type === 'password'
+      ? showPassword
+        ? 'text'
+        : 'password'
+      : type;
+
+  const secendryIcon =
+    showEye && type === 'password' ? (
+      showPassword ? (
+        <Eye
+          size={12}
+          className="cursor-pointer ml-2"
+          onClick={() => setShowPassword(false)}
+        />
+      ) : (
+        <EyeOff
+          size={12}
+          className="cursor-pointer ml-2"
+          onClick={() => setShowPassword(true)}
+        />
+      )
+    ) : null;
 
   return (
     <div className={cn('flex flex-col gap-3', mainClassName)}>
@@ -84,7 +86,7 @@ const Input = ({
       <div>
         <InputShadcn
           id={name}
-          type={inputType}
+          type={resolvedType}
           name={name}
           placeholder={placeholder}
           required={required}

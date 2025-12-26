@@ -8,6 +8,7 @@ export const validationClientHandler = (
   value: string,
   name: TValidationType,
   setError: Dispatch<SetStateAction<TErrorState>>,
+  valuesMatch?: string,
 ) => {
   if (!value.trim()) {
     setError((prev) => {
@@ -19,7 +20,7 @@ export const validationClientHandler = (
   }
 
   const normalized = toEnglishNumber(value);
-  const res = checkValidation(name, normalized);
+  const res = checkValidation(name, normalized, valuesMatch);
 
   setError((prev) => {
     const newErr = { ...prev };

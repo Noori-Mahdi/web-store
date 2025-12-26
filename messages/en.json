@@ -7,6 +7,8 @@
   "profile": "Profile",
   "login": "Login",
   "send": "Send",
+  "accept": "Accept",
+  "cancel": "Cancel",
   "code": "Code",
   "userName": "User name",
   "web": "Web",
@@ -59,6 +61,8 @@
   "OTP_RESEND": "Resend code",
   "OTP_ACCOUNTS_WITH_MOBILE": "Accounts associated with this number:",
   "OTP_LOGIN_WITH_NEW_ACCOUNT": "With a new account",
+
+  "SELECT_ACCOUNT": "Choose an account",
 
   "OTP_EXPIRED": "Your time has expired",
   "OTP_NOT_EXPIRED": "You still have time before requesting a new code.",

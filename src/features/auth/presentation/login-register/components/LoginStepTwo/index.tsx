@@ -28,6 +28,7 @@ import { TAuthAccount } from '@/src/features/auth/domain/entities/type';
 import { Check, Pencil } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
 import Input from '@/src/shared/components/input';
+import { useRouter } from 'next/navigation';
 
 const LoginStepTwo = ({ state, dispatch }: TLoginFormsProps) => {
   const [code, setCode] = useState('');
@@ -40,6 +41,7 @@ const LoginStepTwo = ({ state, dispatch }: TLoginFormsProps) => {
     null,
   );
   const [showLoginForm, setShowLoginForm] = useState(false);
+  const route = useRouter();
 
   const t = useTranslations();
   const { addToast } = useToast();
@@ -111,6 +113,7 @@ const LoginStepTwo = ({ state, dispatch }: TLoginFormsProps) => {
         email: accountSelected.email,
         password: password,
       });
+      route.push('/');
     } catch (error: unknown) {
       const res = errorHandler(error);
       if (typeof res === 'object') {
@@ -125,7 +128,7 @@ const LoginStepTwo = ({ state, dispatch }: TLoginFormsProps) => {
 
   return (
     <>
-      <Card className="w-full max-w-md shadow-xl rounded-2xl  backdrop-blur-md border-2 border-border bg-background ">
+      <Card className="w-full shadow-xl rounded-2xl  backdrop-blur-md border-2 border-border bg-background ">
         <CardContent className="px-6 py-4">
           <form
             onSubmit={handleSubmit}
@@ -160,6 +163,8 @@ const LoginStepTwo = ({ state, dispatch }: TLoginFormsProps) => {
               </div>
             )}
             <Button
+              loading={loading}
+              disabled={loading}
               type="submit"
               className="w-full  cursor-pointer font-semibold rounded-lg shadow-md transition-colors"
             >
@@ -240,14 +245,22 @@ const LoginStepTwo = ({ state, dispatch }: TLoginFormsProps) => {
           ))}
           <div className="flex w-full gap-4 mt-4">
             <Button
+              loading={loading}
+              disabled={loading}
               onClick={() => {
-                setShowLoginForm(true);
+                if (accountSelected) {
+                  setShowLoginForm(true);
+                } else {
+                  addToast('یک حساب انتخاب کن ', 'warning');
+                }
               }}
               className="flex-1"
             >
               {t('enter')}
             </Button>
             <Button
+              loading={loading}
+              disabled={loading}
               variant={'outline'}
               onClick={() => {
                 dispatch({ type: 'setStep', payload: 3 });
@@ -306,6 +319,8 @@ const LoginStepTwo = ({ state, dispatch }: TLoginFormsProps) => {
             />
             <div className="flex gap-2 w-full">
               <Button
+                loading={loading}
+                disabled={loading}
                 onClick={() => {
                   handleLogin();
                 }}
@@ -314,8 +329,11 @@ const LoginStepTwo = ({ state, dispatch }: TLoginFormsProps) => {
                 {t('enter')}
               </Button>
               <Button
+                loading={loading}
+                disabled={loading}
                 onClick={() => {
                   setShowLoginForm(false);
+                  setPassword('');
                 }}
                 variant={'outline'}
                 className="flex-1"

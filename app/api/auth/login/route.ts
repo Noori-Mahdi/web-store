@@ -37,11 +37,9 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const token = jwt.sign(
-      { id: user.id, role: user.role },
-      process.env.JWT_SECRET!,
-      { expiresIn: '12h' },
-    );
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, {
+      expiresIn: '12h',
+    });
 
     const response = NextResponse.json({ message: 'LOGIN_SUCCESS' });
     response.cookies.set('token', token, {

@@ -8,6 +8,8 @@
   "login": "ورود",
   "code": "کد",
   "send": "ارسال",
+  "accept": "تایید",
+  "cancel": "انصراف",
   "phone": "شماره ثابت",
   "mobile": "شماره همراه",
   "email": "نامه الکترونیکی",
@@ -52,6 +54,8 @@
   "PASSWORD_LOWERCASE_REQUIRED": "رمز عبور باید حداقل یک حرف کوچک داشته باشد.",
   "PASSWORD_NUMBER_REQUIRED": "رمز عبور باید حداقل یک عدد داشته باشد.",
   "PASSWORDS_NOT_MATCH": "رمز عبورها یکسان نیستند.",
+
+  "SELECT_ACCOUNT": "یک حساب انتخاب کن",
 
   "OTP_INVALID_LENGTH": "کد باید 5 رقم باشد.",
   "OTP_INVALID_FORMAT": "کد باید فقط شامل عدد باشد.",

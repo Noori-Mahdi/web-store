@@ -1,15 +1,14 @@
 'use client';
 
-import { useReducer } from 'react';
+import { useReducer, useState } from 'react';
 import LoginStepOne from '../LoginStepOne';
 import LoginStepTwo from '../LoginStepTwo';
 import LoginStepThree from '../LoginStepThree';
 import Logo from '@/src/shared/components/logo';
 import { ChevronRight } from 'lucide-react';
-import Container from '@/src/shared/components/container';
-import LanguageButton from '@/src/shared/components/LanguageButton';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
+import Alert from '@/src/shared/components/alert';
 
 export type TLoginState = {
   step: number;
@@ -47,6 +46,7 @@ function loginReducer(state: TLoginState, action: TActionLogin): TLoginState {
 
 const LoginForms = () => {
   const [state, dispatch] = useReducer(loginReducer, initialState);
+  const [showAlert, setShowAlert] = useState(false);
   const roters = useRouter();
   const t = useTranslations();
 
@@ -66,8 +66,8 @@ const LoginForms = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4 w-full">
-      <Container className="flex items-center gap-3 justify-between bg-background rounded-lg border-2 border-border py-2">
+    <div className="flex flex-col gap-4 w-full items-center ">
+      <div className="flex items-center gap-3 max-w-[400px] md:max-w-[600px] w-full justify-between bg-background rounded-lg border-2 border-border px-4 py-2">
         <div className="flex items-center gap-2 justify-between ">
           <Logo width={50} height={50} />
           <h1 className="text-base font-bold flex gap-1">
@@ -76,13 +76,24 @@ const LoginForms = () => {
           </h1>
         </div>
         <div className="flex gap-4 items-center">
-          <LanguageButton className="w-6 h-6 p-2 rounded-sm" />
           <ChevronRight
-            onClick={() => roters.back()}
-            className="hover:text-primary rtl:rotate-180"
+            onClick={() => {
+              setShowAlert(true);
+            }}
+            className="hover:text-primary cursor-pointer rtl:rotate-180"
           />
         </div>
-      </Container>
+        <Alert
+          onAccept={() => roters.back()}
+          onCancel={() => {
+            setShowAlert(false);
+          }}
+          isOpen={showAlert}
+          label={'هشدار'}
+          type={'warning'}
+          massege="با تایید کردن این پیام به صفحه قبلی منتقل می شوید و مراحل ورود کنسل می شود."
+        />
+      </div>
       {renderStep()}
     </div>
   );

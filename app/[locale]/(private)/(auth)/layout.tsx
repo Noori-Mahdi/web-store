@@ -7,9 +7,5 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }) {
   const t = await getTranslations();
-  return (
-    <Container className="flex justify-center min-h-screen">
-      {children}
-    </Container>
-  );
+  return <div className="flex justify-center ">{children}</div>;
 }

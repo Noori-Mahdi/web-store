@@ -32,7 +32,7 @@ const LoginStepThree = ({ state }: TLoginFormsProps) => {
   const t = useTranslations();
 
   const handleValidation = (value: string, name: TValidationType) => {
-    validationClientHandler(value, name, setError);
+    validationClientHandler(value, name, setError, passwordConfirm);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -52,6 +52,7 @@ const LoginStepThree = ({ state }: TLoginFormsProps) => {
       const repo = new AuthRepositoryImpl();
       const result = await register(repo, data);
       addToast(result.message, 'success');
+      route.push('/');
     } catch (error: unknown) {
       const res = errorHandler(error);
       if (typeof res === 'object') {
@@ -65,7 +66,7 @@ const LoginStepThree = ({ state }: TLoginFormsProps) => {
   };
 
   return (
-    <Card className="w-full mb-8 max-w-md shadow-xl rounded-2xl border-2 border-border bg-background backdrop-blur-md  ">
+    <Card className="w-full shadow-xl  rounded-2xl  backdrop-blur-md border-2 border-border bg-background ">
       <CardContent className="px-6 py-4">
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <Input
@@ -124,18 +125,6 @@ const LoginStepThree = ({ state }: TLoginFormsProps) => {
           </Button>
         </form>
       </CardContent>
-
-      <CardFooter className="flex flex-col gap-3 px-6 pb-6">
-        <div className="flex gap-2 justify-between text-sm ">
-          <span>{t('already registered ?')}</span>
-          <Link
-            href="/login"
-            className="\ hover:underline font-medium text-primary"
-          >
-            {t('enter')}
-          </Link>
-        </div>
-      </CardFooter>
     </Card>
   );
 };

@@ -2,6 +2,7 @@ import { prisma } from '@/src/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { serverValidation } from '@/src/shared/utils/validation/server/serverValidation';
+import jwt from 'jsonwebtoken';
 
 type TRegisterBody = {
   email: string;
@@ -72,12 +73,34 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    await prisma.otpSession.delete({ where: { apiKey } });
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, {
+      expiresIn: '12h',
+    });
 
-    return NextResponse.json(
+    const response = NextResponse.json(
       { message: 'REGISTER_SUCCESS', user },
       { status: 201 },
     );
+
+    response.cookies.set('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 60 * 60 * 12,
+      path: '/',
+    });
+
+    response.cookies.set('apiKey', '', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 0,
+      path: '/',
+    });
+
+    await prisma.otpSession.delete({ where: { apiKey } });
+
+    return response;
   } catch (error) {
     console.error(error);
     return NextResponse.json(
