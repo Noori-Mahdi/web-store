@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 const LanguageSwitch = ({ className }: { className?: string }) => {
   const { language, setLanguage } = useLanguage();
 
-
   const isEnglish = language === 'en';
 
   const toggleLanguage = () => {

@@ -1,6 +1,11 @@
 'use client';
 
-import type { ColumnSort, SortDirection, SortingState, Table } from '@tanstack/react-table';
+import type {
+  ColumnSort,
+  SortDirection,
+  SortingState,
+  Table,
+} from '@tanstack/react-table';
 import {
   ArrowDownUp,
   ChevronsUpDown,

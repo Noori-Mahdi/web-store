@@ -7,8 +7,7 @@ import { Switch } from '../shadcn';
 import { useEffect, useState } from 'react';
 
 export function ThemeSwitch({ className }: { className?: string }) {
-  const { theme, setTheme,resolvedTheme } = useTheme();
-
+  const { theme, setTheme, resolvedTheme } = useTheme();
 
   if (!resolvedTheme) return null;
 
