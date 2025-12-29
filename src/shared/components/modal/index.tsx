@@ -66,14 +66,14 @@ const Modal = ({
   return (
     <div
       className={twMerge(
-        'fixed inset-0 z-40 w-full flex justify-center items-center ',
+        'fixed inset-0 z-40 w-full flex justify-center items-center',
         modalClassName,
       )}
     >
       <div className="absolute inset-0 backdrop-blur-xs bg-stone-50/10"></div>
       <div
         className={twMerge(
-          `p-5 rounded shadow-lg max-h-screen m-2 bg-linear-to-tr from-neutral-900 via-neutral-700 to-neutral-800  relative drawer is-open`,
+          `p-5 rounded shadow-lg overflow-y-auto  max-h-screen m-2 bg-linear-to-tr from-neutral-900 via-neutral-700 to-neutral-800  relative drawer is-open`,
           size ? size : 'w-96',
           classNameBox,
         )}

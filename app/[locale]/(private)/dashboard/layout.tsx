@@ -1,6 +1,3 @@
-import { dashboardMenuItems } from '@/mock/objectPageDashboard';
-import Breadcrumb from '@/src/shared/components/breadcrumb';
-import Container from '@/src/shared/components/container';
 import SideDrawer from '@/src/shared/components/side-drawer';
 
 export default function DashboardLayout({
@@ -9,12 +6,11 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex h-full">
-      <SideDrawer className="" list={dashboardMenuItems} />
-      <Container>
-        <Breadcrumb />
+    <div className="flex h-full gap-6">
+      <SideDrawer className="" list={[]} />
+      <div className="flex-1 bg-background  border-2 border-border shadow-2xl rounded-lg p-2">
         {children}
-      </Container>
+      </div>
     </div>
   );
 }

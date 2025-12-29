@@ -13,7 +13,10 @@
   "phone": "شماره ثابت",
   "mobile": "شماره همراه",
   "email": "نامه الکترونیکی",
+  "language": "زبان",
+  "theme": "حالت",
   "followUs": "ما را دنبال کنید",
+  "setting": "نتظیمات",
   "userName": "نام کاربری",
   "register": "ثبت نام",
   "password": "رمز عبور",
@@ -70,5 +73,22 @@
   "OTP_NOT_REQUESTED": "برای این شماره کدی درخواست نشده",
   "OTP_VERIFIED": "کد با موفقیت تأیید شد.",
 
-  "REQUEST_SUCCESSFUL": "درخواست با موفقیت ارسال شد."
+  "REQUEST_SUCCESSFUL": "درخواست با موفقیت ارسال شد.",
+
+  "id": "شناسه",
+  "ban": "مسدود ",
+  "role": "نقش",
+  "addresses": "آدرس",
+  "createdAt": "ساخته شده در",
+  "create user": "ساختن کاربر",
+  "submit": "تایید",
+
+  "No columns found": "ستونی یافت نشد.",
+  "view col": "نمایش",
+  "Search columns": "جستجو ستون ...",
+  "asc": "صعودی",
+  "desc": "نزولی",
+  "hide": "پنهان کردن",
+  "reset": "بازنشانی",
+  "filter": "فیلتر"
 }

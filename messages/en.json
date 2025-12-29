@@ -15,7 +15,10 @@
   "phone": "Phone",
   "mobile": "mobile",
   "email": "Email",
+  "language": "Language",
+  "theme": "Theme",
   "followUs": "Follow us",
+  "setting": "Setting",
   "password": "Password",
   "aboutUs": "About us",
   "contactUs": "Contact us",
@@ -70,5 +73,22 @@
   "OTP_NOT_REQUESTED": "No OTP code has been requested for this number",
   "OTP_VERIFIED": "OTP verified successfully.",
 
-  "REQUEST_SUCCESSFUL": "Request sent successfully."
+  "REQUEST_SUCCESSFUL": "Request sent successfully.",
+
+  "id": "ID",
+  "ban": "Ban",
+  "role": "Role",
+  "addresses": "Addresses",
+  "createdAt": "CreatedAt",
+  "create user": "Create user",
+  "submit": "Submit",
+
+  "No columns found": "No columns found.",
+  "view col": "View",
+  "Search columns": "Search columns ...",
+  "asc": "Asc",
+  "desc": "Desc",
+  "hide": "Hide",
+  "reset": "Reset",
+  "filter": "Filter"
 }

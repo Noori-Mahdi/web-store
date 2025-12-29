@@ -16,8 +16,8 @@ import { TValidationType } from '@/src/shared/utils/validation/checkValidation';
 import { validationClientHandler } from '@/src/shared/utils/validation/client/clientValidationHandler';
 import { errorHandler } from '@/src/shared/utils/errorHandler';
 import { useToast } from '@/src/shared/context/ToastContext';
-import { AuthRepositoryImpl } from '@/src/features/auth/data/AuthRepositoryImpl.ts';
 import { register } from '@/src/features/auth/domain/usecases';
+import { AuthRepositoryImpl } from '@/src/features/auth/data/AuthRepositoryImpl';
 
 const LoginStepThree = ({ state }: TLoginFormsProps) => {
   const [userName, setUserName] = useState('');

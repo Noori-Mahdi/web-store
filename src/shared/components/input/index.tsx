@@ -6,6 +6,7 @@ import { cn } from '@/src/lib/utils';
 import { useTranslations } from 'next-intl';
 
 type TInputProps = {
+  id?: string;
   type?: string;
   name: string;
   value: string;

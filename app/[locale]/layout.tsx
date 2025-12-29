@@ -10,6 +10,7 @@ import { ToastProvider } from '@/src/shared/context/ToastContext';
 import { notFound } from 'next/navigation';
 import { cookies } from 'next/headers';
 import UIWrapper from '@/src/provider/UIWrapper';
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
 type Props = {
   children: React.ReactNode;
@@ -58,7 +59,9 @@ export default async function RootLayout({ children, params }: Props) {
                 disableTransitionOnChange
               >
                 <MainContext>
-                  <UIWrapper>{children}</UIWrapper>
+                  <NuqsAdapter>
+                    <UIWrapper>{children}</UIWrapper>
+                  </NuqsAdapter>
                 </MainContext>
               </ThemeProvider>
             </ToastProvider>

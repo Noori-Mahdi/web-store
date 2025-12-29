@@ -10,7 +10,6 @@ import {
 } from '@/src/shared/components/shadcn';
 import { useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { AuthRepositoryImpl } from '@/src/features/auth/data/AuthRepositoryImpl.ts';
 import {
   login,
   OTPConfirm,
@@ -29,6 +28,7 @@ import { Check, Pencil } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
 import Input from '@/src/shared/components/input';
 import { useRouter } from 'next/navigation';
+import { AuthRepositoryImpl } from '@/src/features/auth/data/AuthRepositoryImpl';
 
 const LoginStepTwo = ({ state, dispatch }: TLoginFormsProps) => {
   const [code, setCode] = useState('');

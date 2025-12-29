@@ -1,4 +1,11 @@
-import { CreditCard, ImagePlus, ShoppingCart, Tags, Users } from 'lucide-react';
+import {
+  CreditCard,
+  Grid2x2,
+  ImagePlus,
+  ShoppingCart,
+  Tags,
+  Users,
+} from 'lucide-react';
 
 export const dashboardMenuItems: {
   label: string;
@@ -6,24 +13,33 @@ export const dashboardMenuItems: {
   icon: React.ReactNode;
 }[] = [
   {
-    label: 'کالاها',
+    label: 'dashboard',
+    name: 'dashboard',
+    icon: <Grid2x2 size={18} />,
+  },
+  {
+    label: 'sold',
+    name: 'sold',
+    icon: <CreditCard size={18} />,
+  },
+  {
+    label: 'products',
     name: 'products',
-    icon: <ShoppingCart size={16} />,
+    icon: <ShoppingCart size={18} />,
   },
   {
-    label: 'کاربران',
+    label: 'users',
     name: 'users',
-    icon: <Users size={16} />,
+    icon: <Users size={18} />,
   },
   {
-    label: 'دسته‌بندی‌ها',
+    label: 'categories',
     name: 'categories',
-    icon: <Tags size={16} />,
+    icon: <Tags size={18} />,
   },
   {
-    label: 'بنرها',
+    label: 'banners',
     name: 'banners',
-    icon: <ImagePlus size={16} />,
+    icon: <ImagePlus size={18} />,
   },
-  { label: 'فروش', name: 'sales', icon: <CreditCard size={16} /> },
 ];

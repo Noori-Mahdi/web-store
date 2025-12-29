@@ -8,7 +8,6 @@ import {
 } from '@/src/shared/components/shadcn';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { AuthRepositoryImpl } from '@/src/features/auth/data/AuthRepositoryImpl.ts';
 import { OTP } from '@/src/features/auth/domain/usecases';
 import { TActionLogin, TLoginState } from '../LoginForms';
 import { useToast } from '@/src/shared/context/ToastContext';
@@ -16,6 +15,7 @@ import { toEnglishNumber, toPersianNumber } from '@/src/shared/utils/numbers';
 import { validationClientHandler } from '@/src/shared/utils/validation/client/clientValidationHandler';
 import { TValidationType } from '@/src/shared/utils/validation/checkValidation';
 import { errorHandler } from '@/src/shared/utils/errorHandler';
+import { AuthRepositoryImpl } from '@/src/features/auth/data/AuthRepositoryImpl';
 
 export type TLoginFormsProps = {
   state: TLoginState;

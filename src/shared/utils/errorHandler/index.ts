@@ -1,4 +1,4 @@
-export const errorHandler = (error: any): string => {
+export const errorHandler = (error: unknown): string => {
   if (error && typeof error === 'object' && 'response' in error) {
     return error.response?.data?.message;
   } else if (error instanceof Error) {

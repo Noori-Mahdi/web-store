@@ -1,4 +1,5 @@
 import { TResponse, TRole } from '@/src/shared/types';
+import { TOTP, TUser } from '@/src/shared/types/prisma.model';
 // Res Type
 export type TOTPConfirmRes = TResponse & {
   data?: TAuthAccount[];
@@ -9,31 +10,13 @@ export type TAuthSuccess = TResponse & {
 };
 
 // Req Type
-export type TLoginReq = {
-  email: string;
-  password: string;
-};
-
-export type TRegisterReq = {
-  userName: string;
-  email: string;
-  password: string;
-};
-
-export type TOTPReq = {
-  mobile: string;
-};
-
-export type TOTPConfirmReq = {
-  code: string;
-  mobile: string;
-};
+export type TLoginReq = Pick<TUser, 'email' | 'password'>;
+export type TRegisterReq = Pick<TUser, 'userName' | 'email' | 'password'>;
+export type TOTPReq = Pick<TUser, 'mobile'>;
+export type TOTPConfirmReq = Pick<TUser, 'mobile'> & Pick<TOTP, 'code'>;
 
 // Auth Type
-export type TAuthAccount = {
-  id: string;
-  userName: string;
-  role: TRole;
-  email: string;
-  avatarUrl?: string;
-};
+export type TAuthAccount = Pick<
+  TUser,
+  'id' | 'userName' | 'role' | 'email' | 'avatarUrl'
+>;
