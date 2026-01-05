@@ -10,6 +10,8 @@ import { useToast } from '@/src/shared/context/ToastContext';
 import Input from '@/src/shared/components/input';
 import { Button } from '@/src/shared/components/shadcn';
 import { TUser } from '../../../domain/entities/type';
+import { FormActions } from '@/src/shared/components/formActions';
+import { CheckboxItem } from '@/src/shared/components/checkboxItem';
 
 export type TUserFormValues = Omit<
   TUser,
@@ -49,7 +51,7 @@ export const UserForm = ({ user, mode, onClose }: TUserFormProps) => {
         addToast('کاربر با موفقیت اضافه شد', 'success');
         onClose?.();
       } else if (mode == 'update') {
-        await updateUser(formValue);
+        await updateUser({ ...formValue, id: user?.id as string });
         addToast('کاربر با موفقیت اضافه شد', 'success');
         onClose?.();
       }
@@ -134,45 +136,25 @@ export const UserForm = ({ user, mode, onClose }: TUserFormProps) => {
         mainClassName=""
       />
 
-      <div className="flex items-center space-x-2 mb-0 px-5">
-        <label className="flex items-center space-x-1">
-          <span>{t('ban')}</span>
-          <input
-            type="checkbox"
-            checked={formValue.ban}
-            onChange={(e) => handleChange('ban', e.target.checked)}
-          />
-        </label>
-      </div>
-      <div className="flex items-center space-x-2 mb-0">
-        <label className="flex items-center space-x-1">
-          <span>{t('admin')}</span>
-          <input
-            type="checkbox"
-            checked={formValue.role === 'admin'}
-            onChange={(e) =>
-              handleChange('role', e.target.checked ? 'admin' : 'user')
-            }
-          />
-        </label>
-      </div>
-      <div className="flex gap-2 w-full ">
-        <Button loading={loading} disabled={loading} className="flex-1">
-          {t('enter')}
-        </Button>
-        <Button
-          loading={loading}
-          disabled={loading}
-          onClick={() => {
-            setFormValue(initial);
-            onClose?.();
-          }}
-          variant={'outline'}
-          className="flex-1"
-        >
-          {t('cancel')}
-        </Button>
-      </div>
+      <CheckboxItem
+        label={t('ban')}
+        checked={formValue.role === 'admin'}
+        onChange={(checked) => handleChange('role', checked ? 'admin' : 'user')}
+      />
+      <CheckboxItem
+        label={t('admin')}
+        checked={formValue.role === 'admin'}
+        onChange={(checked) => handleChange('role', checked ? 'admin' : 'user')}
+      />
+      <FormActions
+        loading={loading}
+        submitText={t('enter')}
+        cancelText={t('cancel')}
+        onCancel={() => {
+          setFormValue(initial);
+          onClose?.();
+        }}
+      />
     </form>
   );
 };

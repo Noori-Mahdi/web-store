@@ -10,3 +10,4 @@ export * from './input-group';
 export * from './dropdown-menu';
 export * from './switch';
 export * from './spinner';
+export * from './alert-dialog';

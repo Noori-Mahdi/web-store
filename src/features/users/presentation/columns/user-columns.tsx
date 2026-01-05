@@ -23,11 +23,13 @@ import { TUserTable } from '../../domain/entities/type';
 export const usersColumns = (
   onEdit: (user: TUserTable) => void,
   onDelete: (user: TUserTable) => void,
-): ColumnDef<TUserTable>[] => [
+): ColumnDef<TUserTable, unknown>[] => [
   {
     id: 'index',
     header: () => <span>#</span>,
     cell: ({ row }) => row.index + 1,
+    enableHiding: false,
+    enableSorting: false,
   },
   {
     id: 'userName',
@@ -106,8 +108,7 @@ export const usersColumns = (
     cell: ({ row }) => (
       <div>
         {row.getValue('role') === 'admin' ? (
-          <span className="flex text-sky-400 items-center gap-1">
-            <ShieldUser size={16} />
+          <span className="flex bg-primary w-fit px-2 rounded-full text-black text-xs py-0.5 font-bold capitalize items-center gap-1">
             admin
           </span>
         ) : (

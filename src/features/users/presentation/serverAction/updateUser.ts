@@ -3,12 +3,24 @@ import { prisma } from '@/src/lib/prisma';
 import bcrypt from 'bcryptjs';
 import { revalidatePath } from 'next/cache';
 import { TUpdateUser } from '../../domain/entities/type';
+import { ActionResult } from '@/src/shared/types';
 
-export async function updateUser(data: TUpdateUser) {
+export async function updateUser(
+  data: TUpdateUser,
+): Promise<ActionResult<null>> {
   if (!data.id) {
-    throw new Error('USER_ID_REQUIRED');
+    return {
+      success: false,
+      message: { userName: ['USER_ID_REQUIRED'] },
+    };
   }
-
+  const existUser = await prisma.user.findFirst({ where: { id: data.id } });
+  if (!existUser) {
+    return {
+      success: false,
+      message: { password: ['USER_NOT_EXISTS'] },
+    };
+  }
   let hashedPassword: string | undefined = undefined;
 
   if (data.password) {
@@ -29,4 +41,5 @@ export async function updateUser(data: TUpdateUser) {
   });
 
   revalidatePath('/dashboard/users');
+  return { success: true, message: 'USER_UPDATE_SUCCESS' };
 }

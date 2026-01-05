@@ -1,5 +1,7 @@
+import { BannerPage } from '@/src/features/Banner/presentation/page';
+
 const Banners = () => {
-  return <>Banners</>;
+  return <BannerPage />;
 };
 
 export default Banners;

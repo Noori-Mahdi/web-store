@@ -24,6 +24,7 @@ export type Address = {
 // Res
 export type TUsersRes = TResponse & {
   data?: TUser[];
+  totalCount?: number;
 };
 
 // serverAction
@@ -34,11 +35,8 @@ export type TAddUser = Pick<
 >;
 
 export type TUpdateUser = Partial<
-  Pick<
-    TUser,
-    'id' | 'userName' | 'email' | 'mobile' | 'password' | 'role' | 'ban'
-  >
->;
+  Pick<TUser, 'userName' | 'email' | 'mobile' | 'password' | 'role' | 'ban'>
+> & { id: string };
 
 // Table
 export type TUserTable = Omit<

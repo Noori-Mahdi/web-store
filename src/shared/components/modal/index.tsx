@@ -106,7 +106,8 @@ const Modal = ({
             </div>
             {!force && (
               <X
-                className=" cursor-pointer text-2xl hover:text-error-300 text-black"
+                size={16}
+                className=" cursor-pointer text-2xl hover:text-error-400 "
                 onClick={closeModalHandler}
               />
             )}

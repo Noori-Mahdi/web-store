@@ -33,11 +33,6 @@ export const dashboardMenuItems: {
     icon: <Users size={18} />,
   },
   {
-    label: 'categories',
-    name: 'categories',
-    icon: <Tags size={18} />,
-  },
-  {
     label: 'banners',
     name: 'banners',
     icon: <ImagePlus size={18} />,

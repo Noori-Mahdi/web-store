@@ -1,28 +1,49 @@
 'use client';
-import { useState } from 'react';
-import { InputGroup, InputGroupAddon, InputGroupInput } from '../shadcn';
-import { Search } from 'lucide-react';
 
-const SearchInput = () => {
-  const [search, setSearch] = useState('');
+import { useState, useEffect, useRef } from 'react';
+import { InputShadcn } from '../shadcn';
 
-  const handleSearch = () => {
-    setSearch('');
+interface SearchBoxProps {
+  value?: string;
+  placeholder?: string;
+  onSearch: (query: string) => void;
+  delay?: number;
+  className?: string;
+}
+
+export function SearchBox({
+  value = '',
+  placeholder = 'Search...',
+  onSearch,
+  delay = 500,
+  className,
+}: SearchBoxProps) {
+  const [search, setSearch] = useState(value);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setSearch(val);
+
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
+    timeoutRef.current = setTimeout(() => {
+      onSearch(val);
+    }, delay);
   };
 
-  return (
-    <InputGroup className="w-90 p-2">
-      <InputGroupInput
-        value={search}
-        onChange={handleSearch}
-        placeholder="search"
-      />
-      <InputGroupAddon>
-        <Search className="" />
-      </InputGroupAddon>
-      <InputGroupAddon align="inline-end">12 آیتم</InputGroupAddon>
-    </InputGroup>
-  );
-};
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
-export default SearchInput;
+  return (
+    <InputShadcn
+      value={search}
+      onChange={handleChange}
+      placeholder={placeholder}
+      className={className}
+    />
+  );
+}

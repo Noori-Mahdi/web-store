@@ -1,16 +1,13 @@
 import { UsersRepositoryImpl } from '../../data/UserRepositoryImpL';
 import { getUsers } from '../../domain/usecases';
-import { UsersTable } from '../components/table/user-table';
+import { UsersTable } from '../components/table/userTable';
 
 const UsersPage = async () => {
   const repo = new UsersRepositoryImpl();
-  const res = await getUsers(repo, {
-    page: 1,
-    pageSize: 10,
-    sort: 'createdAt',
-    order: 'desc',
-  });
+  const res = await getUsers(repo);
+
   const users = res.data;
+
   if (!users) return <div>داده‌ای وجود ندارد</div>;
 
   const pageCount = Math.ceil(users.length / 10);

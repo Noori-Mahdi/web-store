@@ -7,4 +7,7 @@ export default class ApiRouter {
   static register = '/auth/register';
 
   static users = '/dashboard/users';
+  static banner = '/dashboard/banner';
+  static product = '/dashboard/product';
+  static sold = '/dashboard/sold';
 }
